@@ -2,6 +2,6 @@
 //Type in your last name and upload
 //Emin Tahirov 
 //Ian
-//Mauricio
+//Mauricio Castro
 //Linden
 //Santiago
