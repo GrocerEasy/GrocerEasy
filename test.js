@@ -3,5 +3,5 @@
 //Emin
 //Ian
 //Mauricio Castro
-//Linden Young is my name
+//Linden Young
 //Santiago
