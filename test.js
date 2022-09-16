@@ -1,7 +1,8 @@
 //This is a test
 //Type in your last name and upload
-//Emin
 //Ian Robert Hnizdo
-//Mauricio
-//Linden
-//Santiago
+//Emin Tahirov 
+//Ian
+//Santiago Gil Maya
+//Mauricio Castro
+//Linden Young
