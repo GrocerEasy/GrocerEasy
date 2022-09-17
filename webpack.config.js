@@ -14,7 +14,7 @@ module.exports = {
     filename: 'bundle.js',
   },
   devtool: 'eval-source-map',
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   devServer: {
     host: 'localhost',
     port: 8080,
@@ -38,7 +38,7 @@ module.exports = {
      * to localhost:3000/api/* (where our Express server is running)
      */
     proxy: {
-      '/api/**': {
+      '/': {
         target: 'http://localhost:3000/',
         secure: false,
       },
