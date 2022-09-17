@@ -32,8 +32,11 @@ krogerController.getToken = () => {
 // Test call to the Kroger server
 // Hard coded the access token for now, might get an error if expired
 
+//req params req body
+
+//https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 const getMilk = () => {
-  fetch('https://api.kroger.com/v1/products?filter.term=milk&filter.limit=1', {
+  fetch(`https://api.kroger.com/v1/products?filter.term=${productwearelookingfor}&filter.locationId=01400943&filter.limit=1`, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -47,3 +50,10 @@ const getMilk = () => {
       console.log(data);
     });
 };
+
+// // curl -X GET \
+//   'https://api.kroger.com/v1/locations' \
+//   -H 'Accept: application/json' \
+//   -H 'Authorization: Bearer {{TOKEN}}'
+// https://api.kroger.com/v1/locations/{locationId}
+// https://api.kroger.com/v1/locations/{locationId}
