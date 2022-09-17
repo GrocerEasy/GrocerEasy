@@ -17,8 +17,11 @@ app.get('/addToList', groceryController.getFood, (req,res)=>{
 
 // get request to kroger api for food item data
 app.get('/krogerapi', /* getapidata, postdatatodb */(req, res) => {
+  console.log('hello world');
   return res.status(200).send('food not found in db');
 });
+
+// hello world test test test
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) => res.status(404).send('This is not the page you\'re looking for...'));
