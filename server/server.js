@@ -16,8 +16,8 @@ app.get('/addToList', groceryController.getFood, (req,res)=>{
 });
 
 // get request to kroger api for food item data
-app.get('/krogerapi', krogerController.something, (req, res) => {
-  return res.status(200).json(res.locals.whateverWeNameThis);
+app.get('/krogerapi', /* getapidata, postdatatodb */(req, res) => {
+  return res.status(200).send('food not found in db');
 });
 
 // catch-all route handler for any requests to an unknown route
