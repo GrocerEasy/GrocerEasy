@@ -1,0 +1,74 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  /* space */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* styling */
+  border: black;
+  padding: 10px;
+  border-style:solid;
+}
+
+.inputBox {
+  /* space */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* dimensions */
+  width: 500px;
+  /* styling */
+  border: black;
+  padding: 10px;
+  border-style:solid;
+}
+
+/* ShoppingCart.js */
+.shoppingCart {
+  /* space */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* dimensions */
+  width: 800px;
+  height: 100px;
+  /* styling */
+  border: black;
+  padding: 10px;
+  border-style:solid;
+}
+
+.marketTitles {
+  /* space */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  /* styling */
+  border: black;
+  padding: 10px;
+  border-style:solid;
+}
+
+.individualTitle {
+  /* space */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+    /* styling */
+    border: black;
+    padding: 10px;
+    border-style:solid;
+}
