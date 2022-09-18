@@ -7,6 +7,7 @@
   /* dimensions */
   width: 100vw;
   /* styling */
+  background-color: white;
   margin: 0px;
 }
 
@@ -19,6 +20,8 @@
   /* dimensions */
   width: 95vw;
   /* styling */
+  background-color: rgb(26, 26, 169);
+  color: white;
   border: black;
   /* Note: for some reason adding padding will make width increment and only works on right side of this container */
   border-style:solid;
