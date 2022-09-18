@@ -12,6 +12,7 @@ const InputBox = () => {
           <div className="individualTitle">Availability</div>
           <div className="individualTitle">Rating</div>
         </div>
+      {/* The renders of what we will load onto the page will likely go here */}
       </div>
     </div>
   )

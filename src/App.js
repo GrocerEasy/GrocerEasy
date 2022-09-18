@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 function App() {
 
   //States
-
+  
 
     const userName = "John Doe" // CHANGE when authentication works
   
