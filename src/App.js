@@ -6,10 +6,15 @@ import Footer from './components/Footer';
 
 function App() {
 
+<<<<<<< HEAD
   // Define States
   // const[newItemName, setNewItemName] = useState('');
   // const[itemQuantity, setItemQuantity] = useState(0);
 
+=======
+  //States
+  
+>>>>>>> 9410e703abcfda38c49713ff124fbaf098223c85
 
     const userName = "John Doe" // CHANGE when authentication works
   
