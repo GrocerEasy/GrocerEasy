@@ -32,7 +32,7 @@ groceryController.postInfo = (req, res, next) => {
     console.log(res.locals.data);
     //need to know the parameters
     // const query = `INSERT INTO grocery_data (id, food_name, food_id, food_price, food_size) VALUES(${})`
-
+    db.query
 }
 
 /* 
