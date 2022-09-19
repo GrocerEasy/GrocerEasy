@@ -26,7 +26,9 @@ krogerController.getToken = (req, res, next) => {
       tokenData.accessToken = data.access_token;
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
+
       res.locals.tokenInfo = tokenData;
+      // added a next statement
       return next();
     })
     .catch((error) => next(error));
@@ -53,6 +55,11 @@ const getMilk = () => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+      res.locals.data = data;
+      return next();
+    })
+    .catch((err) => {
+      return next({ error: 'error with krogerController.getMilk' });
     });
 };
 
