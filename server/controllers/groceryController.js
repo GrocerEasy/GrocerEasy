@@ -4,36 +4,55 @@ const db = require('../models/groceryModels');
 
 const groceryController = {};
 
-groceryController.getFood = (req, res, next) => {
-    //We will need to modify this string based on a couple of parameters. What store we are requesting from is a major one.
-    const queryString = 'SELECT * FROM grocery_data';
-    const queryString2 = 'SELECT name,price, etc FROM grocery_data WHERE ${}'
+groceryController.checkItem = (req, res, next) => {
+  //We will need to modify this string based on a couple of parameters. What store we are requesting from is a major one.
+  const queryString = 'SELECT * FROM grocery_data';
+  const queryString2 = 'SELECT name, price, etc FROM grocery_data WHERE ${}';
 
-    db.query(queryString)
+  db.query(queryString)
     .then((data) => {
-        if (data) {
-            console.log(data);
-            res.locals.food = data.rows;
-            next();
-        } else {
-            //If we get other apis redirect to `req.body.location`
-            console.log('food not found in db, redirecting to api');
-            //we would have to redirect this to whatever api we are using.
-            res.redirect('/krogerapi');
-        }
+      if (data) {
+        console.log(data);
+        res.locals.food = data.rows;
+        next();
+      } else {
+        //If we get other apis redirect to `req.body.location`
+        console.log('food not found in db, redirecting to api');
+        //we would have to redirect this to whatever api we are using.
+        res.redirect('/krogerapi');
+      }
     })
-    .catch(err => {
-        return next({log: ` err: ${JSON.stringify(err)}`, message: 'Error'})
-    })
-}
+    .catch((err) => {
+      next({ log: ` err: ${JSON.stringify(err)}`, message: 'Error' });
+    });
+};
 
-groceryController.postInfo = (req, res, next) => {
+groceryController.addItem = (req, res, next) => {
+  // from res.locals.itemInfo:
+  // "name": String
+  // "upc" : Number
+  // "price": Number
+  // "size": String
+  // Object.values.
+  // create sql query string to insert row of data to db
+  const queryString =
+    'INSERT INTO grocery_data VALUES (default, $1, $2, $3, $4)';
+  // create var to hold parameterized vars from res.locals.itemInfo
+  const values = Object.values(res.locals.itemInfo);
 
-    console.log(res.locals.data);
-    //need to know the parameters
-    // const query = `INSERT INTO grocery_data (id, food_name, food_id, food_price, food_size) VALUES(${})`
-    db.query
-}
+  db.query(queryString, values)
+    .then((item) => next())
+    .catch((error) => next(error));
+};
+
+// groceryController.postInfo = (req, res, next) => {
+
+//     console.log(res.locals.data);
+//     //need to know the parameters
+//     //If you only wanted to populate the name and price then specify it into parenthesis, otherwise it will do it automatically
+//     // const query = `INSERT INTO grocery_data (id, food_name, food_id, food_price, food_size) VALUES(${})`
+//     db.query
+// }
 
 /* 
 

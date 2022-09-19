@@ -41,7 +41,7 @@ krogerController.getToken = (req, res, next) => {
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 krogerController.getItem = (req, res, next) => {
   fetch(
-    `https://api.kroger.com/v1/products?filter.term=milk&filter.locationId=01400943&filter.limit=1`,
+    `https://api.kroger.com/v1/products?filter.term=ham&filter.locationId=01400943&filter.limit=1`,
     {
       method: 'GET',
       headers: {
@@ -52,8 +52,17 @@ krogerController.getItem = (req, res, next) => {
     }
   )
     .then((res) => res.json())
-    .then((data) => {
-      res.locals.itemInfo = data;
+    .then((info) => {
+      // narrow down the properties we want from the response object that Kroger gives us
+      // food name, upc, price, size
+      const itemDetails = {
+        name: info.data[0].description,
+        upc: info.data[0].upc,
+        price: info.data[0].items[0].price.regular,
+        size: info.data[0].items[0].size,
+      };
+      // store only the data we want in res.locals, to later create new row in db
+      res.locals.itemInfo = itemDetails;
       return next();
     })
     .catch((err) => {

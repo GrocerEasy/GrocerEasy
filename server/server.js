@@ -12,7 +12,7 @@ const krogerController = require('./controllers/krogerController');
 // app.use('/addToGroceryList', )
 
 // get request to check db for input food item
-app.get('/addToList', groceryController.getFood, (req, res) => {
+app.get('/addToList', groceryController.checkItem, (req, res) => {
   return res.status(200).json(res.locals.food);
 });
 
@@ -20,9 +20,16 @@ app.get('/addToList', groceryController.getFood, (req, res) => {
 //   return res.status(200).json(res.locals.tokenInfo);
 // });
 
-app.get('/krogerapi/getItem', krogerController.getToken, krogerController.getItem, (req, res) => {
-  return res.status(200).json(res.locals.itemInfo);
-});
+// get request to grab token and then fetch item data from kroger api
+app.get(
+  '/krogerapi/getItem',
+  krogerController.getToken,
+  krogerController.getItem,
+  groceryController.addItem,
+  (req, res) => {
+    return res.status(200).json(res.locals.itemInfo);
+  }
+);
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) =>
