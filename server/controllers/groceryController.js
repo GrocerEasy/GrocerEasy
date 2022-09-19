@@ -6,20 +6,26 @@ const groceryController = {};
 
 groceryController.checkItem = (req, res, next) => {
   //We will need to modify this string based on a couple of parameters. What store we are requesting from is a major one.
-  const queryString = 'SELECT * FROM grocery_data';
+  const queryString = 'SELECT * FROM grocery_data WHERE food_name = $1';
   const queryString2 = 'SELECT name, price, etc FROM grocery_data WHERE ${}';
+  const values = [req.params.item];
+  console.log(values[0]);
+  console.log(typeof values[0]);
 
-  db.query(queryString)
+  db.query(queryString, values)
     .then((data) => {
-      if (data) {
-        console.log(data);
+    //   console.log(data.rows);
+      if (data.rows.length) {
+        // console.log(data);
         res.locals.food = data.rows;
         next();
       } else {
         //If we get other apis redirect to `req.body.location`
         console.log('food not found in db, redirecting to api');
         //we would have to redirect this to whatever api we are using.
-        res.redirect('/krogerapi');
+        console.log(`THIS IS THE VALUES THING ${values[0]}`);
+        res.redirect(`/krogerapi/getItem/${req.params.item}`);
+        // getItem/:id
       }
     })
     .catch((err) => {
@@ -30,6 +36,7 @@ groceryController.checkItem = (req, res, next) => {
 groceryController.addItem = (req, res, next) => {
   // from res.locals.itemInfo:
   // "name": String
+  
   // "upc" : Number
   // "price": Number
   // "size": String
