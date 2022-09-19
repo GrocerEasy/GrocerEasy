@@ -4,7 +4,9 @@ const InputBox = () => {
   return (
     <div className="shoppingCart">
       <div className="marketContainer">
-        <div className="marketLogo">Kroger Market Logo</div>
+        <div className="marketLogo">Kroger Market Logo
+          <img src="/img/kroger_svg_logo.svg" alt="" />
+        </div>
         <div className="marketTitles">
           <div className="individualTitle">Food</div>
           <div className="individualTitle">Qty</div>

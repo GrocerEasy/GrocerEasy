@@ -65,7 +65,7 @@ function App() {
                   (event) => {setItemQuantity(event.target.value)
                 }} 
               />
-            <button className='addButton'> + Add</button>
+            <button className='addButton' onClick={addToList}> + Add</button>
           </div>
         </div>
 
