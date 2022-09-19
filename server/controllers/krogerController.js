@@ -22,7 +22,6 @@ krogerController.getToken = (req, res, next) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       tokenData.accessToken = data.access_token;
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
@@ -40,7 +39,7 @@ krogerController.getToken = (req, res, next) => {
 //req params req body
 
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
-const getMilk = () => {
+krogerController.getItem = (req, res, next) => {
   fetch(
     `https://api.kroger.com/v1/products?filter.term=milk&filter.locationId=01400943&filter.limit=1`,
     {
@@ -54,12 +53,11 @@ const getMilk = () => {
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      res.locals.data = data;
+      res.locals.itemInfo = data;
       return next();
     })
     .catch((err) => {
-      return next({ error: 'error with krogerController.getMilk' });
+      return next({ error: 'error with krogerController.getItem' });
     });
 };
 
