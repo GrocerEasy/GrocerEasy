@@ -12,6 +12,7 @@ const tokenData = {};
 // token_type: "bearer"
 
 krogerController.getToken = (req, res, next) => {
+  console.log('in getToken');
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
     headers: {
@@ -40,6 +41,7 @@ krogerController.getToken = (req, res, next) => {
 
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 krogerController.getItem = (req, res, next) => {
+  console.log('in getItem');
   fetch(
     `https://api.kroger.com/v1/products?filter.term=${req.params.item}}&filter.locationId=01400943&filter.limit=1`,
     {
