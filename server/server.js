@@ -4,7 +4,7 @@ const app = express();
 const PORT = 3000;
 
 // imports
-// const krogerRouter = require('./routes/krogerRouter', );
+const krogerRouter = require('./controllers/krogerController');
 const groceryController = require('./controllers/groceryController');
 
 //check if it exists in database
@@ -16,7 +16,8 @@ app.get('/addToList', groceryController.getFood, (req,res)=>{
 });
 
 // get request to kroger api for food item data
-app.get('/krogerapi', /* getapidata, postdatatodb */(req, res) => {
+//question, we assume we are working with krogerapi, what about others.
+app.get('/krogerapi', krogerRouter.getToken, krogerRouter.getMilk, groceryController.postInfo, (req, res) => {
   console.log('hello world');
   return res.status(200).send('food not found in db');
 });

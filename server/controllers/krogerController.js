@@ -11,7 +11,9 @@ const tokenData = {};
 // expires_in: 1800 *NOTE* in milliseconds (1800ms = 30 minutes)
 // token_type: "bearer"
 
-krogerController.getToken = () => {
+
+//put in 
+krogerController.getToken = (req, res, next) => {
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
     headers: {
@@ -26,6 +28,8 @@ krogerController.getToken = () => {
       tokenData.accessToken = data.access_token;
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
+      //added a next statement
+      return next();
     });
 };
 
@@ -35,7 +39,7 @@ krogerController.getToken = () => {
 //req params req body
 
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
-const getMilk = () => {
+const getMilk = (req, res, next) => {
   fetch(`https://api.kroger.com/v1/products?filter.term=${productwearelookingfor}&filter.locationId=01400943&filter.limit=1`, {
     method: 'GET',
     headers: {
@@ -48,7 +52,12 @@ const getMilk = () => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-    });
+      res.locals.data = data;
+      return next();
+    })
+    .catch(err => {
+       return next({error: 'error with krogerController.getMilk'});
+      });
 };
 
 // // curl -X GET \
