@@ -1,11 +1,13 @@
 import React from "react";
 
+// import krogerLogo from './img/kroger_svg_logo.svg';
+
 const InputBox = () => {
   return (
     <div className="shoppingCart">
       <div className="marketContainer">
         <div className="marketLogo">Kroger Market Logo
-          <img src="/img/kroger_svg_logo.svg" alt="" />
+          {/* <KrogerLogo /> */}
         </div>
         <div className="marketTitles">
           <div className="individualTitle">Food</div>

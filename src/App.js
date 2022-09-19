@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Axios from 'axios';
+// import krogerLogo from './img/kroger_svg_logo.svg';
+// import logo from './img/'
 
 import Header from './components/Header';
 // import InputBox from './components/InputBox'; // This component was transplanted to this page
@@ -15,27 +17,28 @@ function App() {
 
   // Retrieve Existing List
   // Calls this when we render our page, here we are trying to retrieve our full database
-  useEffect(() => {
-    Axios.get('http://localhost:3000/??????').then((response) => { // !!!CHECK WITH BACKEND GUYS TO GET THE CORRECT ROUTE!!!
-      setGroceryList(response.data)
-    })
-  }, [groceryList]) // Changes to these variables will re-render those specific parts of the code
+  // useEffect(() => {
+  //   Axios.get('http://localhost:3000/??????').then((response) => { // !!!CHECK WITH BACKEND GUYS TO GET THE CORRECT ROUTE!!!
+  //     setGroceryList(response.data)
+  //   })
+  // }, [groceryList]) // Changes to these variables will re-render those specific parts of the code
 
   // Add grocery item
-  const addToList = async () => {
+  const addToList = () => {
     // Communicate front end (reaching this route) with back end and send information
-    Axios.get(`http://localhost:3000/addToList/${newItemName.toLowerCase()}`
-    /*, { // !!!CHECK WITH BACKEND GUYS TO ENSURE THIS IS THE CORRECT ROUTE!!!
-      newItemName: newItemName.toLowerCase(), 
-      itemQuantity: itemQuantity, 
-    }*/
-    );
+    // try {
+      Axios.get(`http://localhost:3000/addToList/${newItemName.toLowerCase()}`)
+    .then(response => console.log(response.data))
+      console.log("got this far")
+   .catch(err => {
+    console.log(err)
+   }) 
   };
 
   // Delete entry
-  const deleteGroceryItem = (id) => { // !!!CHECK WITH BACKEND GUYS TO GET THE CORRECT ROUTE!!!
-    Axios.delete(`http://localhost:3000/??????/${id}`)
-  }
+  // const deleteGroceryItem = (id) => { // !!!CHECK WITH BACKEND GUYS TO GET THE CORRECT ROUTE!!!
+  //   Axios.delete(`http://localhost:3000/??????/${id}`)
+  // }
 
   // Customer name placeholder - CHANGE when authentication works
   const userName = "John Doe";

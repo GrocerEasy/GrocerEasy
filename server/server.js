@@ -2,6 +2,9 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const PORT = 3000;
+const cors = require('cors');
+
+app.use(cors());
 
 // imports
 const krogerRouter = require('./controllers/krogerController');

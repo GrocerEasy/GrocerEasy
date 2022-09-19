@@ -6,13 +6,12 @@ const InputBox = () => {
 
   return (
     <div>
-
       <div className="inputBox">
         <label>Item Name </label>
           <input
             className="itemInputBox"
             // Add onChange event here
-            
+
           />
         <label>Qty</label>
           <input
@@ -22,8 +21,6 @@ const InputBox = () => {
           />
         <button > Add to Cart</button>
       </div>
-
-      
     </div>
   )
 }

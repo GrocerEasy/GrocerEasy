@@ -17,7 +17,7 @@ groceryController.checkItem = (req, res, next) => {
     //   console.log(data.rows);
       if (data.rows.length) {
         // console.log(data);
-        res.locals.food = data.rows;
+        res.locals.food = data.rows[0];
         next();
       } else {
         //If we get other apis redirect to `req.body.location`
