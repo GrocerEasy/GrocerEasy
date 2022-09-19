@@ -10,7 +10,14 @@ const Footer = (props) => {
         <li>React</li>
         <li>Kroger API</li>
       </div>
-      <div>About Us</div>
+      <div>
+        The Team:
+        <li>Ian Hnizdo</li>
+        <li>Santiago Gil</li>
+        <li>Emin Tahirov</li>
+        <li>Linden Young</li>
+        <li>Mauricio Castro</li>
+        </div>
       <div>
         In Partnership with:
         <li>CodeSmith</li>

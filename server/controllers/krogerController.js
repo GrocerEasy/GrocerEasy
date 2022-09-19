@@ -58,10 +58,10 @@ krogerController.getItem = (req, res, next) => {
       // narrow down the properties we want from the response object that Kroger gives us
       // food name, upc, price, size
       const itemDetails = {
-        name: info.data[0].description,
+        food_name: info.data[0].description,
         upc: info.data[0].upc,
-        price: info.data[0].items[0].price.regular,
-        size: info.data[0].items[0].size,
+        food_price: info.data[0].items[0].price.regular,
+        food_size: info.data[0].items[0].size,
       };
       // store only the data we want in res.locals, to later create new row in db
       res.locals.itemInfo = itemDetails;
