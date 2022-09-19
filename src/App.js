@@ -24,10 +24,12 @@ function App() {
   // Add grocery item
   const addToList = async () => {
     // Communicate front end (reaching this route) with back end and send information
-    Axios.post('http://localhost:3000/addToList', { // !!!CHECK WITH BACKEND GUYS TO ENSURE THIS IS THE CORRECT ROUTE!!!
+    Axios.get(`http://localhost:3000/addToList/${newItemName.toLowerCase()}`
+    /*, { // !!!CHECK WITH BACKEND GUYS TO ENSURE THIS IS THE CORRECT ROUTE!!!
       newItemName: newItemName.toLowerCase(), 
-      itemQuantity: itemQuantity,
-    });
+      itemQuantity: itemQuantity, 
+    }*/
+    );
   };
 
   // Delete entry
@@ -36,7 +38,7 @@ function App() {
   }
 
   // Customer name placeholder - CHANGE when authentication works
-  const userName = "John Doe"
+  const userName = "John Doe";
   
 
     return (
@@ -63,7 +65,7 @@ function App() {
                   (event) => {setItemQuantity(event.target.value)
                 }} 
               />
-            <button > Add to Cart</button>
+            <button className='addButton'> + Add</button>
           </div>
         </div>
 
