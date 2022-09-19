@@ -46,6 +46,10 @@ module.exports = {
         target: 'http://localhost:3000/',
         secure: false,
       },
+      '/krogerapi/**': {
+        target: 'http://localhost:3000/',
+        secure: false,
+      },
     },
   },
   module: {
@@ -61,7 +65,7 @@ module.exports = {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
-      }
+      },
     ],
   },
   plugins: [

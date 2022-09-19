@@ -11,8 +11,6 @@ const tokenData = {};
 // expires_in: 1800 *NOTE* in milliseconds (1800ms = 30 minutes)
 // token_type: "bearer"
 
-
-//put in 
 krogerController.getToken = (req, res, next) => {
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
@@ -28,37 +26,44 @@ krogerController.getToken = (req, res, next) => {
       tokenData.accessToken = data.access_token;
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
-      //added a next statement
+
+      res.locals.tokenInfo = tokenData;
+      // added a next statement
       return next();
-    });
+    })
+    .catch((error) => next(error));
 };
 
 // Test call to the Kroger server
-// Hard coded the access token for now, might get an error if expired
+// Hard coded the product name on line 43: filter.term=milk
 
 //req params req body
 
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
-const getMilk = (req, res, next) => {
-  fetch(`https://api.kroger.com/v1/products?filter.term=${productwearelookingfor}&filter.locationId=01400943&filter.limit=1`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      Authorization:
-        'Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vYXBpLmtyb2dlci5jb20vdjEvLndlbGwta25vd24vandrcy5qc29uIiwia2lkIjoiWjRGZDNtc2tJSDg4aXJ0N0xCNWM2Zz09IiwidHlwIjoiSldUIn0.eyJhdWQiOiJnZXRncm9jZXJpZXMtMzE1MTdhMDgwOWZlNDY3MDM0MmI5MjhjYmZiMTBlZGQ2Mzg4NjA1Nzk5Nzk0NzAwNTM2IiwiZXhwIjoxNjYzNDQwOTYwLCJpYXQiOjE2NjM0MzkxNTUsImlzcyI6ImFwaS5rcm9nZXIuY29tIiwic3ViIjoiZDJkMWE1NWMtOGEzYi01ZGYzLTk4ZDMtZmQxNjY5YzA4MzEzIiwic2NvcGUiOiJwcm9kdWN0LmNvbXBhY3QiLCJhdXRoQXQiOjE2NjM0MzkxNjA2OTIzODM3NjMsImF6cCI6ImdldGdyb2Nlcmllcy0zMTUxN2EwODA5ZmU0NjcwMzQyYjkyOGNiZmIxMGVkZDYzODg2MDU3OTk3OTQ3MDA1MzYifQ.s74yvhUpomR3VYZUJS4uASSlf_xuwrbIo8J0eGI5PdRCp5cgw0c6pdFIXsGIHU0uq6R0lG8BnSO2SqCSci1GafWcxwWfvAOOMVtgJDlffq5ZdW7NqAx5Yhw2TJJkSiOWh9Z83gXFEMbQ6hDh7gkup5kBZIoQMzC8Q0cGt_cYkD1cGXUDESL-KXysixuADcjU9Q5U-sMbFo-AQdYvyQ4SH6JJgPMT1Ao3obO-JerxwH28tlITsgmLK6W9hHyEdQWtaeF42kolnw-L4YwjFRcYAwcG34csdyksQqjT7ORpmKkWFKDg2QrTxQiSfCRrDKtID4mtaYFM4_nXoaUpvVrXGQ',
-      'Access-Control-Allow-Origin': '*',
-    },
-  })
+const getMilk = () => {
+  fetch(
+    `https://api.kroger.com/v1/products?filter.term=milk&filter.locationId=01400943&filter.limit=1`,
+    {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${tokenData.accessToken}`,
+        'Access-Control-Allow-Origin': '*',
+      },
+    }
+  )
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
       res.locals.data = data;
       return next();
     })
-    .catch(err => {
-       return next({error: 'error with krogerController.getMilk'});
-      });
+    .catch((err) => {
+      return next({ error: 'error with krogerController.getMilk' });
+    });
 };
+
+module.exports = krogerController;
 
 // // curl -X GET \
 //   'https://api.kroger.com/v1/locations' \
