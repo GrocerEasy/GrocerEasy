@@ -12,7 +12,8 @@ const krogerController = require('./controllers/krogerController');
 // app.use('/addToGroceryList', )
 
 // get request to check db for input food item
-app.get('/addToList', groceryController.checkItem, (req, res) => {
+// newItemName
+app.get('/addToList/:item', groceryController.checkItem, (req, res) => {
   return res.status(200).json(res.locals.food);
 });
 
@@ -22,7 +23,7 @@ app.get('/addToList', groceryController.checkItem, (req, res) => {
 
 // get request to grab token and then fetch item data from kroger api
 app.get(
-  '/krogerapi/getItem',
+  '/krogerapi/getItem/:item',
   krogerController.getToken,
   krogerController.getItem,
   groceryController.addItem,

@@ -41,7 +41,7 @@ krogerController.getToken = (req, res, next) => {
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 krogerController.getItem = (req, res, next) => {
   fetch(
-    `https://api.kroger.com/v1/products?filter.term=ham&filter.locationId=01400943&filter.limit=1`,
+    `https://api.kroger.com/v1/products?filter.term=${req.params.item}}&filter.locationId=01400943&filter.limit=1`,
     {
       method: 'GET',
       headers: {
