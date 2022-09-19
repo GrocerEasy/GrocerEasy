@@ -1,8 +1,14 @@
-body {
+#root, body {
+  /* space */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* dimensions */
+  width: 100vw;
+  /* styling */
+  background-color: white;
+  margin: 0px;
 }
 
 .header {
@@ -11,9 +17,13 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  /* dimensions */
+  width: 95vw;
   /* styling */
+  background-color: rgb(26, 26, 169);
+  color: white;
   border: black;
-  padding: 10px;
+  /* Note: for some reason adding padding will make width increment and only works on right side of this container */
   border-style:solid;
 }
 
@@ -38,8 +48,9 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  justify-content: center;
   /* dimensions */
-  width: 800px;
+  width: 500px;
   height: 100px;
   /* styling */
   border: black;
@@ -67,8 +78,23 @@ body {
   justify-content: space-between;
   align-items: center;
 
-    /* styling */
-    border: black;
-    padding: 10px;
-    border-style:solid;
+  /* styling */
+  border: black;
+  padding: 10px;
+  margin: 5px;
+  border-style:solid;
+}
+
+.footer {
+  /* space */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* dimensions */
+  width: 95vw;
+  /* styling */
+  border: black;
+  /* Note: for some reason adding padding will make width increment and only works on right side of this container */
+  border-style:solid;
 }
