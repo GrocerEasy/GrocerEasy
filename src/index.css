@@ -20,7 +20,7 @@
   /* dimensions */
   width: 95vw;
   /* styling */
-  background-color: rgb(26, 26, 169);
+  background-color: rgb(65, 65, 158);
   color: white;
   border: black;
   /* Note: for some reason adding padding will make width increment and only works on right side of this container */
@@ -37,6 +37,7 @@
   width: 500px;
   /* styling */
   border: black;
+  border-radius: 10px;
   padding: 10px;
   border-style:solid;
 }
@@ -54,6 +55,7 @@
   height: 100px;
   /* styling */
   border: black;
+  border-radius: 10px;
   padding: 10px;
   border-style:solid;
 }
@@ -67,6 +69,7 @@
 
   /* styling */
   border: black;
+  border-radius: 10px;
   padding: 10px;
   border-style:solid;
 }
@@ -83,6 +86,17 @@
   padding: 10px;
   margin: 5px;
   border-style:solid;
+}
+
+.addButton {
+  /* space */
+  /* dimensions */
+  height: 25px;
+  /* styling */
+  color: white;
+  background-color: lightblue;
+  border-radius: 15px;
+  border-style: none;
 }
 
 .footer {
