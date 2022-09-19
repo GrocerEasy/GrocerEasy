@@ -24,10 +24,12 @@ function App() {
   // Add grocery item
   const addToList = async () => {
     // Communicate front end (reaching this route) with back end and send information
-    Axios.post(`http://localhost:3000/addToList/${newItemName}`, { // !!!CHECK WITH BACKEND GUYS TO ENSURE THIS IS THE CORRECT ROUTE!!!
+    Axios.get(`http://localhost:3000/addToList/${newItemName.toLowerCase()}`
+    /*, { // !!!CHECK WITH BACKEND GUYS TO ENSURE THIS IS THE CORRECT ROUTE!!!
       newItemName: newItemName.toLowerCase(), 
-      itemQuantity: itemQuantity,
-    });
+      itemQuantity: itemQuantity, 
+    }*/
+    );
   };
 
   // Delete entry
