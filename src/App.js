@@ -14,23 +14,58 @@ function App() {
   const[newItemName, setNewItemName] = useState('');
   const[itemQuantity, setItemQuantity] = useState(0);
   const [groceryList, setGroceryList] = useState([]) // State for list of foods
+  const [totalPrice, setTotalPrice] = useState(0);
 
   // Retrieve Existing List
   // Calls this when we render our page, here we are trying to retrieve our full database
-  // useEffect(() => {
-  //   Axios.get('http://localhost:3000/??????').then((response) => { // !!!CHECK WITH BACKEND GUYS TO GET THE CORRECT ROUTE!!!
-  //     setGroceryList(response.data)
-  //   })
-  // }, [groceryList]) // Changes to these variables will re-render those specific parts of the code
+  useEffect(() => {
+    console.log(groceryList)
+  }, [groceryList]) // Changes to these variables will re-render those specific parts of the code
+
+  const deleteItem = (name, price, qty) => {
+    const newGroceryList = groceryList.filter((item) => item.food_name !== name);
+    setGroceryList(newGroceryList);
+    setTotalPrice((Number(totalPrice) - (Number(price) * qty)).toFixed(2));
+  }
+
+  // decrease edit 
+  const decreaseHandler = (name) => {
+    setGroceryList(groceryList.map((item) => {
+      if (item.food_name === name) {
+        if (item.qty > 1) {
+          item.qty--;
+          setTotalPrice((Number(totalPrice) - (Number(item.food_price))).toFixed(2));
+        }
+      }
+      return item
+    }))
+  }
+  
+  // increase edit
+  const increaseHandler = (name) => {
+    setGroceryList(groceryList.map((item) => {
+      if (item.food_name === name) {
+        item.qty++;
+      }
+      setTotalPrice((Number(totalPrice) + (Number(item.food_price))).toFixed(2));
+      return item
+    }))
+  }
 
   // Add grocery item
   const addToList = () => {
     // Communicate front end (reaching this route) with back end and send information
     // try {
-      Axios.get(`http://localhost:3000/addToList/${newItemName.toLowerCase()}`)
-    .then(response => console.log(response.data))
-      console.log("got this far")
-   .catch(err => {
+    Axios.get(`http://localhost:3000/addToList/${newItemName.toLowerCase()}`)
+    .then(response => {
+      console.log(response.data)
+      response.data.qty = itemQuantity;
+      response.data.food_name = newItemName;
+      setTotalPrice(Number(totalPrice) + Number(response.data.food_price * response.data.qty))
+      // updating state to include the new food item data
+      setGroceryList([...groceryList, response.data]);
+    })
+   .catch(err => {  
     console.log(err)
    }) 
   };
@@ -41,7 +76,7 @@ function App() {
   // }
 
   // Customer name placeholder - CHANGE when authentication works
-  const userName = "John Doe";
+  const userName = "Will Paragraph";
   
 
     return (
@@ -60,7 +95,7 @@ function App() {
                   (event) => {setNewItemName(event.target.value);
                 }}
               />
-            <label>Qty</label>
+            <label style={{marginLeft: '10px'}}>Qty</label>
               <input
                 className="qtyInputBox"
                 type="number" 
@@ -68,26 +103,30 @@ function App() {
                   (event) => {setItemQuantity(event.target.value)
                 }} 
               />
-            <button className='addButton' onClick={addToList}> + Add</button>
+            <button style={{marginLeft: '10px'}} className='addButton' onClick={addToList}> + Add</button>
           </div>
         </div>
 
         <br />
-        {/* SHOPPING CART */}
-        <ShoppingCart />
+        {/* SHOPPING CART foodName = {val.food_name}*/}
+        <ShoppingCart totalPrice={totalPrice}/>
 
-        {groceryList.map((val, key) => {
-     return <div key={key} className="groceryCartFull"> {/* This key removes the warning in the browser console log */}
-
-              <div className="groceryCartItem groceryName">{val.groceryName} grams</div>
-              <div className="groceryCartItem groceryQty">{val.groceryQty}</div>
-              <div className="groceryCartItem groceryPrice">{val.groceryPrice}</div>
-              <div className="groceryCartItem groceryAvailability">{val.groceryAvailability}</div>
-
-              <button className="deleteButton" onClick={() => deleteGroceryItem(val._id)}> X </button>
-            </div>
-        })}
-
+        <div className="shoppingListDisplay">
+          {groceryList.map((val, key) => {
+            return (
+              <div key={key} className="groceryCartFull"> {/* This key removes the warning in the browser console log */}
+                <div className="groceryCartItem groceryName">{val.food_name}</div>
+                <div className="groceryCartItem groceryQty">{val.qty}</div>
+                <div className="groceryCartItem grocerySize">{val.food_size}</div>
+                <div className="groceryCartItem groceryPrice">${val.food_price}</div>
+                {/* <button className="deleteButton" onClick={() => deleteGroceryItem(val._id)}> X </button> */}
+                <button style={{marginLeft: '10px', marginRight: '10px'}}onClick={()=>increaseHandler(val.food_name)}>⬆️</button>
+                <button style={{marginRight: '10px'}}onClick={()=>decreaseHandler(val.food_name)}>⬇️</button>
+                <button className='deleteButton btn btn-danger' onClick={() => deleteItem(val.food_name, val.food_price, val.qty)}>X</button>
+            </div>)
+          })}
+        </div>
+          
         <br />
         <Footer />
       </>

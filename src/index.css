@@ -7,8 +7,14 @@
   /* dimensions */
   width: 100vw;
   /* styling */
-  background-color: white;
+  font-family: monospace;
+  background-color: rgb(248, 226, 245);
   margin: 0px;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 5px;
 }
 
 .header {
@@ -20,7 +26,7 @@
   /* dimensions */
   width: 95vw;
   /* styling */
-  background-color: rgb(65, 65, 158);
+  background-color: rgb(224, 145, 217);
   color: white;
   border: black;
   /* Note: for some reason adding padding will make width increment and only works on right side of this container */
@@ -34,7 +40,7 @@
   justify-content: space-between;
   align-items: center;
   /* dimensions */
-  width: 500px;
+  width: auto;
   /* styling */
   border: black;
   border-radius: 10px;
@@ -51,41 +57,75 @@
   align-items: center;
   justify-content: center;
   /* dimensions */
-  width: 500px;
-  height: 100px;
+  width: 650px;
+  height: auto;
   /* styling */
   border: black;
   border-radius: 10px;
   padding: 10px;
-  border-style:solid;
+  border-style:none;
 }
 
-.marketTitles {
+.marketTitles, .groceryCartFull {
+  /* space */
+  display: flex;
+  flex-direction: row;
+  justify-content:start;
+  align-items: center;
+
+  /* dimensions */
+  width: 600px;
+
+  /* styling */
+  border: black;
+  border-radius: 10px;
+  padding: 0px;
+  border-style:none;
+}
+
+.groceryCartItem {
   /* space */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
+  /* dimensions */
+  height: 10px;
   /* styling */
   border: black;
   border-radius: 10px;
-  padding: 10px;
-  border-style:solid;
+  padding: 5px;
+  margin: 0px;
+  border-style:none;
 }
 
-.individualTitle {
+.individualTitle, .groceryName, .groceryQty, .grocerySize, .groceryPrice {
   /* space */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
+  
   /* styling */
   border: black;
-  padding: 10px;
+  padding: 8px;
   margin: 5px;
   border-style:solid;
+}
+
+.groceryName {
+  text-transform: capitalize;
+  width: 80px;
+} 
+.groceryQty {
+  width: 50px;
+}
+.grocerySize {
+  text-transform: capitalize;
+  width: 130px;
+}
+.groceryPrice {
+  width: 70px;
 }
 
 .addButton {
@@ -99,16 +139,68 @@
   border-style: none;
 }
 
-.footer {
+.deleteButton {
   /* space */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  /* dimensions */
+  height: 25px;
+  width: 25px;
+  /* styling */
+  color: red;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  border-style: solid;
+}
+
+.footer {
+  /* space */
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  bottom: 0;
+  align-items: flex-start;
   /* dimensions */
   width: 95vw;
   /* styling */
+  background-color: rgb(243, 243, 243);
   border: black;
+  padding: 5px;
   /* Note: for some reason adding padding will make width increment and only works on right side of this container */
   border-style:solid;
+}
+
+/* .shoppingListDisplay {
+  border: 1px solid black;
+  border-radius: 50%;
+  
+} */
+
+.total-price-display {
+
+}
+
+.logoDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.krogerLogo{
+  height: 40px;
+   width: 100px; 
+}
+
+.itemInputBox {
+  /* dimensions */
+  width: auto;
+}
+
+.qtyInputBox {
+  /* dimensions */
+  width: 50px;
 }
