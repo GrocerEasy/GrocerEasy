@@ -61,7 +61,7 @@ function App() {
       console.log(response.data)
       response.data.qty = itemQuantity;
       response.data.food_name = newItemName;
-      setTotalPrice(Number(totalPrice) + Number(response.data.food_price * response.data.qty))
+      setTotalPrice((Number(totalPrice) + Number(response.data.food_price * response.data.qty)).toFixed(2))
       // updating state to include the new food item data
       setGroceryList([...groceryList, response.data]);
     })
