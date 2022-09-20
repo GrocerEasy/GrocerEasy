@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: 'bundle.js'
   },
   devtool: 'eval-source-map',
   mode: process.env.NODE_ENV,
@@ -27,7 +27,7 @@ module.exports = {
       // match the output path
       directory: path.resolve(__dirname, 'dist'),
       // match the output 'publicPath'
-      publicPath: '/',
+      publicPath: '/'
     },
 
     headers: { 'Access-Control-Allow-Origin': '*' },
@@ -39,18 +39,9 @@ module.exports = {
      */
     proxy: {
       '/': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-      '/assets/**': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-      '/krogerapi/**': {
-        target: 'http://localhost:3000/',
-        secure: false,
-      },
-    },
+        target: 'http://localhost:3000'
+      }
+    }
   },
   module: {
     rules: [
@@ -58,23 +49,23 @@ module.exports = {
         test: /.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: 'babel-loader'
+        }
       },
       {
         test: /.(css|scss)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
+        use: ['style-loader', 'css-loader']
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
+      template: './src/index.html'
+    })
   ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
-    extensions: ['.js', '.jsx', '.json'],
-  },
+    extensions: ['.js', '.jsx', '.json']
+  }
 };
