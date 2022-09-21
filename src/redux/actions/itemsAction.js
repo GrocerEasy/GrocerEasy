@@ -37,3 +37,32 @@ export const listProducts = () => async (dispatch) => {
     });
   }
 };
+
+export const productDetails = () => async (dispatch) => {
+  try {
+    // Dispatch the request -> We're now calling the reducer SET_ITEM_REQUEST -> Set loading: true, and cart: []
+    dispatch({ type: SET_ITEM_REQUEST });
+
+    const { data } = await axios.get('/api/test');
+    // console.log(data);
+
+    // Dispatch reducer success
+    dispatch({
+      type: SET_ITEM_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: SET_ITEM_FAIL,
+      /** Error Notes
+       * error.response is a generic message
+       * error.response.data.message should give us the backend error response
+       * error.message is a generic message
+       */
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    });
+  }
+};

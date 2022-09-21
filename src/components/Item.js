@@ -12,13 +12,19 @@ function Item({ cart }) {
         <div className='groceryCartItem groceryPrice'>$0.69</div>
         {/* <button className="deleteButton" onClick={() => deleteGroceryItem(val._id)}> X </button> */}
         <button
-          style={{ marginLeft: '10px', marginRight: '10px' }}
+          className='addItem'
+          style={{
+            marginLeft: '10px',
+            marginRight: '10px',
+            background: 'green'
+          }}
           // onClick={() => increaseHandler(val.food_name)}
         >
           ⬆️
         </button>
         <button
-          style={{ marginRight: '10px' }}
+          className='decrementItem'
+          style={{ marginRight: '10px', background: 'red' }}
           // onClick={() => decreaseHandler(val.food_name)}
         >
           ⬇️
