@@ -1,15 +1,19 @@
-#root, body {
-  /* space */
+.root {
+  /* space   min-height: 100vh;
+  /* backgroundColor: theme.palette.secondary.light, */
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* space */
   /* dimensions */
-  width: 100vw;
+  /* height: 100vw; */
   /* styling */
   font-family: monospace;
   background-color: rgb(248, 226, 245);
-  margin: 0px;
+  /* margin: 0px; */
 }
 
 li {
@@ -19,12 +23,9 @@ li {
 
 .header {
   /* space */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   /* dimensions */
-  width: 95vw;
+  width: 100vw;
   /* styling */
   background-color: rgb(224, 145, 217);
   color: white;
@@ -166,7 +167,7 @@ li {
   bottom: 0;
   align-items: flex-start;
   /* dimensions */
-  width: 95vw;
+  width: 100vw;
   /* styling */
   background-color: rgb(243, 243, 243);
   border: black;
@@ -205,3 +206,34 @@ li {
   /* dimensions */
   width: 50px;
 }
+.app-root {
+  width: 95%
+}
+.mainContainer {
+  /* dimensions */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 70vh;
+  width: 95%;
+}
+.searchResultsContainer {
+  /* dimensions */
+  flex-grow: 2;
+  /* display: flex; */
+  /* justify-content: center; */
+  min-height: 100%;
+  border-radius: 25px 0 0 25px;
+}
+.searchBox {
+  /* position: fixed; */
+  height: 10%;
+}
+.cartContainer {
+  /* dimensions */
+  flex-grow: 1;
+  min-height: 100%;
+  border-radius: 0 25px 25px 0;
+}
+

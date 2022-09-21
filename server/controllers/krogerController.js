@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fetch = require('cross-fetch')
 const krogerController = {};
 // Declare an empty object
 // Store token data in this object
