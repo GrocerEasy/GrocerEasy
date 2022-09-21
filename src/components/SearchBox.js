@@ -23,7 +23,7 @@ const SearchBox = () => {
   };
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <input
         type="text"
         placeholder="Search Items"
