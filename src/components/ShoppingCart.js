@@ -7,6 +7,11 @@ function ShoppingCart() {
   // This is the hook redux store method
   const dispatch = useDispatch();
 
+  // Pulling from the state -> Look at the ./reducers/index.js file for the state name
+  const cartList = useSelector((state) => state.cartList);
+  const { loading, error, cart } = cartList;
+  console.log('cart', cart);
+
   // Making the request to the backend for products
   useEffect(() => {
     dispatch(listProducts());
@@ -78,6 +83,13 @@ function ShoppingCart() {
         </div>
         {/* The renders of what we will load onto the page will likely go here */}
         {/* {arrayOfItems} */}
+        {loading ? (
+          <h2>Loading...</h2>
+        ) : error ? (
+          <h3>{error}</h3>
+        ) : (
+          <Item cart={cart} />
+        )}
       </div>
     </div>
   );
