@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development webpack serve --open & nodemon server/server.js"
+    "dev": "concurrently \"nodemon server/server.js\" \"cross-env NODE_ENV=development webpack serve --open\""
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "colors": "^1.4.0",
+    "concurrently": "^7.4.0",
     "cors": "^2.8.5",
     "dot-env": "^0.0.1",
     "dotenv": "^16.0.2",
@@ -34,6 +35,7 @@
     "react-router": "^6.4.0",
     "react-router-dom": "^6.4.0",
     "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
