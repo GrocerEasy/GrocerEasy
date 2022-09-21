@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const Footer = (props) => {
   return (
@@ -29,7 +29,7 @@ const Footer = (props) => {
 
 // Default userName to there! in case a username is not passed
 Footer.defaultProps = {
-  userName: 'there!'
+  userName: 'value to key = username in Footer component'
 }
 
-export default Footer
+export default Footer;
