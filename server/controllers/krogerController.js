@@ -1,8 +1,11 @@
 require('dotenv').config();
+const axios = require('axios');
 const krogerController = {};
 // Declare an empty object
 // Store token data in this object
 const tokenData = {};
+// import fetch from 'node-fetch';
+const fetch = require('cross-fetch')
 
 // Makes a POST request to the Kroger server
 // Right now, only logs the response, and saves data to the tokenData object declared above but get back
@@ -13,6 +16,7 @@ const tokenData = {};
 
 krogerController.getToken = (req, res) => {
   console.log('in getToken');
+  console.log(process.env.KROG_AUTH_CREDENTIALS)
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
     headers: {
@@ -27,6 +31,7 @@ krogerController.getToken = (req, res) => {
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
       setInterval(krogerController.getToken, tokenData.expiresIn * 60 * 100); //request new token when old token expires
+     
       return tokenData;
     })
     .catch((error) => console.log(error));
