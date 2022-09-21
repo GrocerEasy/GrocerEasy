@@ -1,5 +1,4 @@
 const krogerController = {};
-
 // Declare an empty object
 // Store token data in this object
 const tokenData = {};
@@ -17,9 +16,9 @@ krogerController.getToken = (req, res, next) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic Z2V0Z3JvY2VyaWVzLTMxNTE3YTA4MDlmZTQ2NzAzNDJiOTI4Y2JmYjEwZWRkNjM4ODYwNTc5OTc5NDcwMDUzNjo5bUJnSWZZaWRyQjNoQ0VzNFdMTXV5VGROV3dOX1hoLW1LdjB4aEJH`,
+      Authorization: `Basic Z2V0Z3JvY2VyaWVzLTMxNTE3YTA4MDlmZTQ2NzAzNDJiOTI4Y2JmYjEwZWRkNjM4ODYwNTc5OTc5NDcwMDUzNjo5bUJnSWZZaWRyQjNoQ0VzNFdMTXV5VGROV3dOX1hoLW1LdjB4aEJH`
     },
-    body: 'grant_type=client_credentials&scope=product.compact',
+    body: 'grant_type=client_credentials&scope=product.compact'
   })
     .then((res) => res.json())
     .then((data) => {
@@ -49,8 +48,8 @@ krogerController.getItem = (req, res, next) => {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${tokenData.accessToken}`,
-        'Access-Control-Allow-Origin': '*',
-      },
+        'Access-Control-Allow-Origin': '*'
+      }
     }
   )
     .then((res) => res.json())
@@ -61,7 +60,7 @@ krogerController.getItem = (req, res, next) => {
         food_name: info.data[0].description,
         upc: info.data[0].upc,
         food_price: info.data[0].items[0].price.regular,
-        food_size: info.data[0].items[0].size,
+        food_size: info.data[0].items[0].size
       };
       // store only the data we want in res.locals, to later create new row in db
       res.locals.itemInfo = itemDetails;
