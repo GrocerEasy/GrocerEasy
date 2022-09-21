@@ -14,7 +14,7 @@ groceryController.checkItem = (req, res, next) => {
 
   db.query(queryString, values)
     .then((data) => {
-    //   console.log(data.rows);
+      //   console.log(data.rows);
       if (data.rows.length) {
         // console.log(data);
         res.locals.food = data.rows[0];
@@ -36,7 +36,7 @@ groceryController.checkItem = (req, res, next) => {
 groceryController.addItem = (req, res, next) => {
   // from res.locals.itemInfo:
   // "name": String
-  
+
   // "upc" : Number
   // "price": Number
   // "size": String

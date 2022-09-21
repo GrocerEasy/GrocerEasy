@@ -1,6 +1,7 @@
-import { combineReducers } from 'redux'
-import itemsCount from './itemsCount'
+import { combineReducers } from 'redux';
+import itemReducer from './itemReducer';
 
 export default combineReducers({
-  itemsCount
+  // cartList is what's going to be shown in the state (Redux dev tools)
+  cartList: itemReducer
 });

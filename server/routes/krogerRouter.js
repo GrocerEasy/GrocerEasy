@@ -16,4 +16,14 @@ router.get('/:item/:location', krogerController.getItem, (req, res) => {
   return res.status(200).json(res.locals.itemInfo);
 });
 
+// Test route
+router.get('/test', (req, res) => {
+  return res.status(200).json([
+    {
+      success: true,
+      msg: 'Hello from the backend'
+    }
+  ]);
+});
+
 module.exports = router;
