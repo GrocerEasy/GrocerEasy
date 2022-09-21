@@ -15,7 +15,7 @@ export const listProducts = () => async (dispatch) => {
     dispatch({ type: SET_ITEM_REQUEST });
 
     const { data } = await axios.get('/api/test');
-    console.log(data);
+    // console.log(data);
 
     // Dispatch reducer success
     dispatch({

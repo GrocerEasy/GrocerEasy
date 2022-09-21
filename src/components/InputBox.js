@@ -9,11 +9,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 const InputBox = () => {
-  // const myState = useSelector((state) => state.itemsCount.itemQuantity);
-  // console.log('+++++++ STATE ++++++++', myState);
-  // const dispatch = useDispatch();
-
-  const [newItemName, setNewItemName] = useState('');
+  // const [newItemName, setNewItemName] = useState('');
   const [itemQuantity, setItemQuantity] = useState(0);
 
   const addToList = () => {
