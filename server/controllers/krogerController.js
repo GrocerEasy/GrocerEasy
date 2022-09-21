@@ -12,7 +12,6 @@ const tokenData = {};
 // token_type: "bearer"
 
 krogerController.getToken = (req, res, next) => {
-  console.log('in getToken');
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
     headers: {
