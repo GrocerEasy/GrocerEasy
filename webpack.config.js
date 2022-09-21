@@ -17,7 +17,7 @@ module.exports = {
   mode: process.env.NODE_ENV,
   devServer: {
     host: 'localhost',
-    port: 8081,
+    port: 8080,
     // enable HMR on the devServer
     hot: true,
     // fallback to root for other urls

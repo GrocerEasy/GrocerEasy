@@ -14,8 +14,10 @@ export default function (state = initialState, action) {
 
   switch (type) {
     // Depending on type, what do we want to return to state
+    //* ___________TEST____________
     case SET_ITEM_TEST:
       return { loading: false, msg: payload };
+    //* ___________TEST____________
     case SET_ITEM_REQUEST:
       // Setting a loading key
       return { loading: true, cart: [] };
