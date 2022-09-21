@@ -45,6 +45,7 @@
     "babel-loader": "^8.2.5",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
+    "express-session": "^1.17.3",
     "html-webpack-plugin": "^5.5.0",
     "nodemon": "^2.0.20",
     "sass": "^1.54.9",
