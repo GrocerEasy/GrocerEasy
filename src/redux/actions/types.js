@@ -1,0 +1,7 @@
+// Holds variables, constants
+// THESE ARE OUR ACTION TYPES FOLDER
+
+export const SET_ITEM_NAME = 'SET_ITEM_NAME';
+export const SET_ITEM_INCREMENT = 'SET_ITEM_INCREMENT';
+export const SET_ITEM_DECREMENT = 'SET_ITEM_DECREMENT';
+export const SET_ITEM_QUANTITY = 'SET_ITEM_QUANTITY';
