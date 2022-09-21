@@ -1,5 +1,5 @@
 const express = require('express');
-const groceryData = require('../controllers/groceryController');
+const groceryData = require('../controllers/cartController');
 const krogerController = require('../controllers/krogerController');
 const router = express.Router();
 

@@ -5,6 +5,7 @@ const PORT = 3000;
 const colors = require('colors');
 const krogerRouter = require('./routes/krogerRouter');
 const authRouter = require('./routes/authRouter');
+const cartRouter = require('./routes/cartRouter');
 const session = require('express-session');
 const krogerController = require('./controllers/krogerController');
 const intervalTimeMinutes = 30; //intervalTimeMinutes * 1000 * 60
@@ -29,6 +30,8 @@ app.use(session({
 app.use('/api', krogerRouter);
 // any login/register attempts will post to /auth, which will be handled by authRouter
 app.use('/auth', authRouter);
+// router that will handle logic related to adding items to cart associated with current authenticated user
+app.use('/cart', cartRouter);
 
 // ROUTE THAT WILL BE ACCESSED WHEN USER AUTHENTICATES
 app.get('/home', (req, res) => {
