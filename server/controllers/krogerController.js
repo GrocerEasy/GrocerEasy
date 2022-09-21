@@ -1,3 +1,4 @@
+require('dotenv').config();
 const krogerController = {};
 // Declare an empty object
 // Store token data in this object
@@ -10,13 +11,13 @@ const tokenData = {};
 // expires_in: 1800 *NOTE* in milliseconds (1800ms = 30 minutes)
 // token_type: "bearer"
 
-krogerController.getToken = (req, res, next) => {
+krogerController.getToken = (req, res) => {
   console.log('in getToken');
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: `Basic Z2V0Z3JvY2VyaWVzLTMxNTE3YTA4MDlmZTQ2NzAzNDJiOTI4Y2JmYjEwZWRkNjM4ODYwNTc5OTc5NDcwMDUzNjo5bUJnSWZZaWRyQjNoQ0VzNFdMTXV5VGROV3dOX1hoLW1LdjB4aEJH`
+      Authorization: `Basic ${process.env.KROG_AUTH_CREDENTIALS}`
     },
     body: 'grant_type=client_credentials&scope=product.compact'
   })
@@ -25,12 +26,10 @@ krogerController.getToken = (req, res, next) => {
       tokenData.accessToken = data.access_token;
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
-
-      res.locals.tokenInfo = tokenData;
-      // added a next statement
-      return next();
+      setInterval(krogerController.getToken, tokenData.expiresIn * 60 * 100); //request new token when old token expires
+      return tokenData;
     })
-    .catch((error) => next(error));
+    .catch((error) => console.log(error));
 };
 
 // Test call to the Kroger server
@@ -40,30 +39,36 @@ krogerController.getToken = (req, res, next) => {
 
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 krogerController.getItem = (req, res, next) => {
-  console.log('in getItem');
+  const { item, location } = req.params;
+  //make sure front end sends a default location ID if user does not provide one
+  // 01400943
+  //FILTER LIMIT SET TO 5, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
   fetch(
-    `https://api.kroger.com/v1/products?filter.term=${req.params.item}}&filter.locationId=01400943&filter.limit=1`,
+    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=5`,
     {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${tokenData.accessToken}`,
-        'Access-Control-Allow-Origin': '*'
+        Authorization: `Bearer ${tokenData.accessToken}`
+        // 'Access-Control-Allow-Origin': '*',
       }
     }
   )
     .then((res) => res.json())
     .then((info) => {
       // narrow down the properties we want from the response object that Kroger gives us
-      // food name, upc, price, size
-      const itemDetails = {
-        food_name: info.data[0].description,
-        upc: info.data[0].upc,
-        food_price: info.data[0].items[0].price.regular,
-        food_size: info.data[0].items[0].size
-      };
-      // store only the data we want in res.locals, to later create new row in db
-      res.locals.itemInfo = itemDetails;
+      console.log('info', info);
+      const itemsDetails = [];
+      info.data.forEach((el) =>
+        itemsDetails.push({
+          food_name: el.description,
+          upc: el.upc,
+          food_price: el.items[0].price.regular,
+          food_size: el.items[0].size
+        })
+      );
+      //return array of first 5 objects matching our search criteria
+      res.locals.itemInfo = itemsDetails;
       return next();
     })
     .catch((err) => {
@@ -71,6 +76,45 @@ krogerController.getItem = (req, res, next) => {
     });
 };
 
+krogerController.getLocation = (req, res, next) => {
+  const { zipCode } = req.params;
+  //FILTER LIMIT SET TO 5, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
+  let locationUrl = `https://api.kroger.com/v1/locations?filter.zipCode.near=${zipCode}&filter.limit=5`;
+  // Location request body
+  fetch(locationUrl, {
+    method: 'GET',
+    cache: 'no-cache',
+    headers: {
+      Authorization: `bearer ${tokenData.accessToken}`,
+      'Content-Type': 'application/json; charset=utf-8'
+    }
+  })
+    .then((response) => response.json())
+    .then((info) => {
+      console.log('getLocationInfo:', info);
+      const locationInfo = [];
+      info.data.forEach((store) =>
+        locationInfo.push({
+          name: store.name,
+          locationId: store.locationId,
+          geolocation: store.geolocation,
+          chain: store.chain,
+          hours: store.hours,
+          address: store.address,
+          phone: store.phone
+        })
+      );
+      console.log('location info', locationInfo);
+      res.locals.locationInfo = locationInfo;
+      next();
+    })
+    .catch((err) => {
+      return next({ error: 'error with krogerController.getLocation' });
+    });
+  // Return JSON object
+  // console.log(locationResponse.json());
+  // return ;
+};
 module.exports = krogerController;
 
 // // curl -X GET \

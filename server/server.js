@@ -4,9 +4,18 @@ const app = express();
 const PORT = 3000;
 const colors = require('colors');
 const krogerRouter = require('./routes/krogerRouter');
+const krogerController = require('./controllers/krogerController');
+const intervalTimeMinutes = 30; //intervalTimeMinutes * 1000 * 60
+// setInterval(krogerController.getToken, 10000); 
+let callCount = 0;
+console.log(callCount)
+if(callCount === 0){
+  console.log('here')
+  callCount++;
+  krogerController.getToken();
+}
 
 app.use(express.json());
-
 app.use('/api', krogerRouter);
 
 // catch-all route handler for any requests to an unknown route
