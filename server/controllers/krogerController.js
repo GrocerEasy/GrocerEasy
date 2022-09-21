@@ -1,5 +1,4 @@
 require('dotenv').config();
-const axios = require('axios');
 const krogerController = {};
 // Declare an empty object
 // Store token data in this object
