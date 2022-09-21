@@ -40,11 +40,12 @@ krogerController.getToken = (req, res) => {
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 krogerController.getItem = (req, res, next) => {
   const { item, location } = req.params;
+  console.log('req.params',item, location)
   //make sure front end sends a default location ID if user does not provide one
   // 01400943
-  //FILTER LIMIT SET TO 5, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
+  //FILTER LIMIT SET TO 10, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
   fetch(
-    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=5`,
+    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=10`,
     {
       method: 'GET',
       headers: {
@@ -77,9 +78,9 @@ krogerController.getItem = (req, res, next) => {
 };
 
 krogerController.getLocation = (req, res, next) => {
-  const { zipCode } = req.params;
+  const { zip_code } = req.params;
   //FILTER LIMIT SET TO 5, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
-  let locationUrl = `https://api.kroger.com/v1/locations?filter.zipCode.near=${zipCode}&filter.limit=5`;
+  let locationUrl = `https://api.kroger.com/v1/locations?filter.zipCode.near=${zip_code}&filter.limit=5`;
   // Location request body
   fetch(locationUrl, {
     method: 'GET',
