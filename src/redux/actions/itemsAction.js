@@ -5,7 +5,7 @@ import {
   SET_ITEM_SUCCESS,
   SET_ITEM_FAIL,
   SET_ITEM_TEST
-} from './types';
+} from '../types/types';
 
 // Using redux-thunk with the async. Dispatch is how we dispatch/initiate actions
 // We can now fire this off where ever we want to display the cart
