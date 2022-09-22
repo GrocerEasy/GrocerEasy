@@ -3,22 +3,24 @@ header {
 }
 
 .header {
-    /* space */
-    display: flex;
-    text-align: right;
-    /* dimensions */
-    width: 100vw;
-    /* styling */
-    background-color: rgb(224, 145, 217);
-    color: white;
-    border: black;
-    /* Note: for some reason adding padding will make width increment and only works on right side of this container */
-    border-style:solid;
-  }
+  /* space */
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  /* dimensions */
+  width: 100vw;
+  height: 80px;
+  /* styling */
+  /* background-color: var(--primary-color); */
+  background: var(--gradient);
+  color: var(--primary-text-color);
+  border: 0px;
+  box-shadow: 0 0 15px 2px var(--primary-color);
+}
 
   .logoContainer {
-    height: 140px;
-    width: 140px;
+    height: 70px;
+    width: 70px;
   }
 
   .logoContainer img {
