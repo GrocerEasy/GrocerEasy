@@ -3,7 +3,7 @@ import {
   SET_ITEM_SUCCESS,
   SET_ITEM_FAIL,
   SET_ITEM_TEST
-} from '../actions/types';
+} from '../types/types';
 
 const initialState = {
   cart: []
