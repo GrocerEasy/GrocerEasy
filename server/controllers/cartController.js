@@ -38,7 +38,7 @@ cartController.getCart = (req, res, next) => {
   res.clearCookie('data', { httpOnly: true });
   // get user's cart info using the id stored in the cookie
   const uid = userData.user.id;
-  db.query('SELECT f.* FROM cart c RIGHT OUTER JOIN cart_item ci ON ci.cart_id = c.id RIGHT OUTER JOIN food f ON f.id = ci.food_id WHERE c.user_id = $1;', [uid], (error, results) => {
+  db.query('SELECT f.*, ci.cart_id FROM cart c RIGHT OUTER JOIN cart_item ci ON ci.cart_id = c.id RIGHT OUTER JOIN food f ON f.id = ci.food_id WHERE c.user_id = $1;', [uid], (error, results) => {
     if (error) {
       // invoke express error handler
       return next(error);
