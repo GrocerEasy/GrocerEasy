@@ -39,9 +39,9 @@ function MainContainer() {
   };
   const handleDeleteItemFromCart = (cartItemIndex) => {
     console.log(cartItemIndex)
-    const newArray = itemsInCart.filter((item) => !itemsInCart.indexOf(cartItemIndex))
+    const newArray = itemsInCart.filter((item) => !itemsInCart[cartItemIndex])
     console.log('new', newArray)
-    setItemsInCart(newArray.splice(cartItemIndex, 1));
+    setItemsInCart(newArray);
     console.log("cart", itemsInCart);
   };
   const handleOnChangeSearchProduct = (e) =>

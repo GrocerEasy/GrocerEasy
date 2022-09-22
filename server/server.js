@@ -7,10 +7,12 @@ const authRouter = require('./routes/authRouter');
 const cartRouter = require('./routes/cartRouter');
 const cookieParser = require('cookie-parser');
 const intervalTimeMinutes = 30; //intervalTimeMinutes * 1000 * 60
+const krogerController = require('./controllers/krogerController')
 
 // setInterval(krogerController.getToken, 10000);
 let callCount = 0;
 if (callCount === 0) {
+  krogerController.getToken();
   callCount++;
 }
 // let callCount = 0;
@@ -18,7 +20,6 @@ if (callCount === 0) {
 // if (callCount === 0) {
 //   console.log('here');
 //   callCount++;
-//   krogerController.getToken();
 // }
 
 app.use(express.json());
