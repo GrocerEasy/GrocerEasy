@@ -5,6 +5,7 @@
   --secondary-color: #f8e2f5;
   --tertiary-color: #FFE3E1;
   --primary-text-color: white;
+  --gradient: linear-gradient( to bottom, var(--primary-color-light),  var(--primary-color));
 }
 /* element {
 } */
@@ -25,6 +26,18 @@
   background-color: var(--secondary-color);
   /* margin: 0px; */
 }
+.forms {
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: monospace;
+  background-color: var(--secondary-color);
+}
+
 
 li {
   list-style: none;
@@ -37,11 +50,11 @@ li {
   /* dimensions */
   width: 100vw;
   /* styling */
-  background-color: var(--primary-color);
-  color: white;
-  border: black;
-  /* Note: for some reason adding padding will make width increment and only works on right side of this container */
-  border-style:solid;
+  /* background-color: var(--primary-color); */
+  background: var(--gradient);
+  color: var(--primary-text-color);
+  border: 0px;
+  box-shadow: 0 0 15px 2px var(--primary-color);
 }
 
 .inputBox {
@@ -225,7 +238,7 @@ li {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  height: 70vh;
+  height: 80vh;
   width: 95%;
   border-radius: 25px;
   border-color: var(--primary-color);
@@ -233,7 +246,7 @@ li {
 }
 .searchResultsContainer {
   /* dimensions */
-  flex-grow: 2;
+  /* flex-grow: 2; */
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
@@ -313,6 +326,7 @@ input:focus {
 .searchResultsDisplay {
   display: flex;
 justify-content: center;
+margin-top: 10px;
 }
 .searchResultsTable {
   width: 90%;
@@ -321,6 +335,7 @@ justify-content: center;
 }
 td {
   text-align: center;
+  color: --primary-color
 }
 tr {
   margin-top: 50px;
