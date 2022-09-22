@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import { redirect } from "react-router";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ErrorBox from "./ErrorBox";
+import './componentStylesheets/SignupLogin.css';
 
 
 export default function Signup() {
@@ -16,7 +15,7 @@ export default function Signup() {
   async function submitInfoToAuthRouter (e) {
     e.preventDefault();
     
-    let body = {
+    const body = {
       username: username,
       email: email,
       password: password
@@ -36,16 +35,13 @@ export default function Signup() {
           setDisplayErr(errMsg);
           return;
         }
-
         console.log("data", data);
         // Save userID (data.userID) and username (data.username) in state (Redux)
         sessionStorage.setItem('accessToken', `${data.accessToken}`);
         Navigate('/');
       })
       .catch((err) => {
-        // assuming there was either some backend error OR the username or email is already associated with an account, this error gets returned from server
-        // get err message (err.locals? err.message?) and display on frontend
-        
+        // add logic for handling server error
       })
   }
   
@@ -54,19 +50,20 @@ export default function Signup() {
   return (
     <div className="forms">
       <h1>Sign Up</h1>
-      <form onSubmit={submitInfoToAuthRouter}>
+      <form id="signup-form" onSubmit={submitInfoToAuthRouter}>
         <label>Username:</label>
-        <input type='text' name="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
-
+        <input className="username-field" type='text' name="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
         <br/>
+
         <label>Email:</label>
-        <input type='text' name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+        <input className="email-field" type='text' name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+        <br/>
 
-        <br/>
         <label>Password:</label>
-        <input type='password' name="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+        <input className="password-field" type='password' name="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
         <br/>
-        <input type='submit'></input>
+
+        <input className="submit-button" type='submit'></input>
       </form>
       {errorDisplay}
     </div>

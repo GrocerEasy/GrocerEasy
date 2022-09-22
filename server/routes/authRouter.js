@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
     let password = req.body.password;
     let email = req.body.email;
     // IF both parameters are truthy
-    if (username && password) {
+    if (username && password && email) {
         db.query('SELECT * FROM user_info WHERE username = $1 AND password = $2 AND email = $3', [username, password, email], (error, results) => {
             // if the query to the DB does not find a match, output the error;
             if (error) res.status(400).json({ err: 'An error has occurred in the login route' });

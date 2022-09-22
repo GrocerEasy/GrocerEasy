@@ -11,8 +11,8 @@ const Header = (props) => {
         <img src={Logo}/>
       </div>
       <nav>
-        <Link to='/login'>Log In</Link>
-        <Link to='/signup'>Sign Up</Link>
+        <Link className="header-login-signup-button" to='/login'>Log In</Link>
+        <Link className="header-login-signup-button" to='/signup'>Sign Up</Link>
       </nav>
       <Outlet />
     </header>
