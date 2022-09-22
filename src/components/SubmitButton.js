@@ -1,9 +1,9 @@
 import React from "react";
 const SubmitButton = ({ handleOnClick, children }) => {
   return (
-    <div>
-      <button onClick={handleOnClick}>{children}</button>
-    </div>
+    < >
+      <button style={{position: 'flexEnd'}} className="submitButton"onClick={handleOnClick}>{children}</button>
+    </>
   );
 };
 export default SubmitButton;

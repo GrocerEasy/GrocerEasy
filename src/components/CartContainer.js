@@ -7,20 +7,10 @@ import SearchBox from "./SearchBox";
 
 function CartContainer() {
   return (
-    <div className="cartContainer" style={{backgroundColor:"green"}}>
-           <div className="cartHeader">
-        {/* <SearchBox
-          // handleOnChange={handleOnChange}
-          // handleOnClick={handleOnClick}
-        >
-          Search Products
-        </SearchBox> */}
-      </div>
-      <div className="searchResultsDisplay">
-        {/* {searchResults} */}
-
-        
-      </div>
+    <div className="cartContainer">
+      <div className="cartHeader">Shopping Cart</div>
+      <div >Contents</div>
+      <div className="cartFooter"><div>Total</div><div>$1,000,000</div></div>
     </div>
   );
 }
