@@ -27,3 +27,9 @@ ALTER TABLE "cart_item" ADD CONSTRAINT "cart_item_fk0" FOREIGN KEY ("cart_id") R
 ALTER TABLE "cart_item" ADD CONSTRAINT "cart_item_fk1" FOREIGN KEY ("food_id") REFERENCES "food"("id");
 
 SELECT f.* FROM cart c RIGHT OUTER JOIN cart_item ci ON ci.cart_id = c.id RIGHT OUTER JOIN food f ON f.id = ci.food_id WHERE c.user_id = 2;
+
+WITH f AS (
+INSERT INTO food (food_name, food_id, food_price, food_size, quantity) VALUES ($1, $2, $3, $4, $5) RETURNING id;
+)  
+INSERT INTO cart_item (food_id, cart_id) SELECT f.id, $6
+FROM f;

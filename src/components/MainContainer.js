@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchResultsContainer from "./SearchResultsContainer";
 import CartContainer from "./CartContainer";
 import krogerApis from "./utils/krogerApis";
+
+// Redux
+import { useSelector } from 'react-redux';
 
 function MainContainer() {
   const [searchProductsText, setSearchProductsText] = useState("");
@@ -9,6 +12,32 @@ function MainContainer() {
   const [productSearchResults, setProductsSearchResults] = useState([]);
   const [storeLocationsResults, setStoreLocationResults] = useState([]);
   const [itemsInCart, setItemsInCart] = useState([]);
+
+  // 
+  const userLogin = useSelector((state) => state.userLogin);
+  // User info will have user, message, accesstoken
+  const userInfo = userLogin.user;
+  const userCart = userLogin.cart;
+  console.log(userLogin)
+  // if(userLogin){ 
+  //   setItemsInCart([])}
+  //   console.log('userINfo',userInfo)
+    //userInfo.user.id
+    //userInfo.user.username
+  //userInfo.cart
+  /** Accessing data
+   * id -> userInfo.user.id
+   * 
+   */
+  useEffect(()=>{
+    if(userLogin.userInfo){
+      console.log('here',userLogin.userInfo.cart)
+
+      setItemsInCart([...userLogin.userInfo.cart]);
+
+    }
+    console.log(itemsInCart)
+  },[])
 
   const submitSearchProductText = async () => {
     const request = "searchStoreItems";
@@ -38,10 +67,10 @@ function MainContainer() {
     console.log("cart", itemsInCart);
   };
   const handleDeleteItemFromCart = (cartItemIndex) => {
-    console.log(cartItemIndex)
-    const newArray = itemsInCart.filter((item) => !itemsInCart.indexOf(cartItemIndex))
+    console.log('index',cartItemIndex, 'items', itemsInCart)
+    const newArray = itemsInCart.filter((item, index) => index !== cartItemIndex)
     console.log('new', newArray)
-    setItemsInCart(newArray.splice(cartItemIndex, 1));
+    setItemsInCart(newArray);
     console.log("cart", itemsInCart);
   };
   const handleOnChangeSearchProduct = (e) =>
@@ -60,6 +89,7 @@ function MainContainer() {
       <CartContainer
         itemsInCart={itemsInCart}
         handleDeleteItemFromCart={handleDeleteItemFromCart}
+        userStatus={userLogin.userInfo}
       />
       {/* <InputAndCartContainer /> */}
     </div>
