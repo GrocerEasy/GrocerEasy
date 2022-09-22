@@ -49,19 +49,19 @@ module.exports = {
         test: /.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader'
-        }
+          loader: 'babel-loader',
+        },
       },
       {
         test: /.(css|scss)$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader']
+        exclude: [/node_modules/, /client\/stylesheets\/modules/],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf)$/,
         loader: 'url-loader',
-      }
-    ]
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({

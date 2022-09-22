@@ -53,18 +53,20 @@ export default function Signup() {
   const errorDisplay = displayErr ? <ErrorBox value={displayErr}/> : null;
 
   return (
-    <div>
+    <div className="forms">
       <h1>Sign Up</h1>
       <form onSubmit={submitInfoToAuthRouter}>
         <label>Username:</label>
         <input type='text' name="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
 
+        <br/>
         <label>Email:</label>
         <input type='text' name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
 
+        <br/>
         <label>Password:</label>
         <input type='password' name="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-
+        <br/>
         <input type='submit'></input>
       </form>
       {errorDisplay}
