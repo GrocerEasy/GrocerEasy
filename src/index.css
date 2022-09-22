@@ -21,19 +21,6 @@ li {
   margin-bottom: 5px;
 }
 
-.header {
-  /* space */
-  text-align: center;
-  /* dimensions */
-  width: 100vw;
-  /* styling */
-  background-color: rgb(224, 145, 217);
-  color: white;
-  border: black;
-  /* Note: for some reason adding padding will make width increment and only works on right side of this container */
-  border-style:solid;
-}
-
 .inputBox {
   /* space */
   display: flex;
