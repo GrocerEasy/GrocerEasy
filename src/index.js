@@ -8,17 +8,23 @@ import App from './App';
 import Login from './components/Login';
 import Signup from './components/Signup';
 
+// Redux
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="Login" element={<Login />} />
-      <Route path="Signup" element={<Signup />} />
-    </Routes>
-  </BrowserRouter>
+  <Provider store={store}>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<App />} />
+        <Route path='Login' element={<Login />} />
+        <Route path='Signup' element={<Signup />} />
+      </Routes>
+    </BrowserRouter>
+  </Provider>
   // </React.StrictMode>
 );
