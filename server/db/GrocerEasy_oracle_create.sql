@@ -25,3 +25,5 @@ CREATE TABLE "cart_item" (
 ALTER TABLE "cart" ADD CONSTRAINT "cart_fk0" FOREIGN KEY ("user_id") REFERENCES "user_info"("id");
 ALTER TABLE "cart_item" ADD CONSTRAINT "cart_item_fk0" FOREIGN KEY ("cart_id") REFERENCES "cart"("id");
 ALTER TABLE "cart_item" ADD CONSTRAINT "cart_item_fk1" FOREIGN KEY ("food_id") REFERENCES "food"("id");
+
+SELECT f.* FROM cart c RIGHT OUTER JOIN cart_item ci ON ci.cart_id = c.id RIGHT OUTER JOIN food f ON f.id = ci.food_id WHERE c.user_id = 2;

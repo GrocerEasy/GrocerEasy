@@ -11,7 +11,7 @@ router.post('/update', cartController.update, (req, res) => {
 
 // Get current user's cart when they successfully login
 router.get('/getcart/:id', cartController.getCart, (req, res) => {
-    
+  res.status(200).json(res.locals.loginResult)
 })
 
 module.exports = router;
