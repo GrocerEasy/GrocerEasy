@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-const app = express();
+export const app = express();
 const PORT = 3000;
 const colors = require('colors');
 const krogerRouter = require('./routes/krogerRouter');
@@ -20,11 +20,13 @@ console.log(callCount);
 app.use(express.json());
 
 // create a new session for users, that will be used when they attempt to authenticate
-app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
 app.use('/api', krogerRouter);
 // any login/register attempts will post to /auth, which will be handled by authRouter
