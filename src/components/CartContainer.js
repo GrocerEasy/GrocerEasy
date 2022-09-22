@@ -5,10 +5,11 @@ import Footer from "./Footer";
 import SubmitButton from "./SubmitButton";
 import SearchBox from "./SearchBox";
 import CartItem from "./CartItem";
+import cartApis from "./utils/addCartToDatabase";
 
-function CartContainer({ itemsInCart, handleDeleteItemFromCart }) {
+function CartContainer({ itemsInCart, handleDeleteItemFromCart, userStatus }) {
   const [cartTotal, setCartTotal] = useState(0.00);
-  const [userLoggedIn, setUserLoggedIn] = useState()
+  const [userLoggedIn, setUserLoggedIn] = useState(false)
   const cartResults = itemsInCart.length
     ? itemsInCart.map((item, index) => (
         <CartItem
@@ -27,9 +28,13 @@ function CartContainer({ itemsInCart, handleDeleteItemFromCart }) {
   };
 
   const handleSaveCart = () => {
-    cartApis.addCartToDatabase();
+    cartApis.addCartToDatabase(cartResults);
 
   }
+  useEffect(() => {
+    if(userStatus)setUserLoggedIn(true);
+
+  }, [])
   useEffect(() => {
     sumCartItems();
   }, [itemsInCart]);

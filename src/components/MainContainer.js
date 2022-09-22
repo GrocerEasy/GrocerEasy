@@ -89,6 +89,7 @@ function MainContainer() {
       <CartContainer
         itemsInCart={itemsInCart}
         handleDeleteItemFromCart={handleDeleteItemFromCart}
+        userStatus={userLogin.userInfo}
       />
       {/* <InputAndCartContainer /> */}
     </div>

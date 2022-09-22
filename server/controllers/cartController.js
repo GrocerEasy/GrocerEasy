@@ -5,8 +5,10 @@ const cartController = {};
 
 cartController.update = (req, res, next) => {
   // expecting userID to be passed in on req.body.user
+  console.log('body',req.body)
   const {food_name, food_id, food_price, food_size, quantity, cart_id} = req.body;
-  const text = 'WITH f AS (INSERT INTO food (food_name, food_id, food_price, food_size, quantity) VALUES ($1, $2, $3, $4, $5) RETURNING id;) INSERT INTO cart_item (food_id, cart_id) SELECT f.id, $6 FROM f;'
+  const text = 'INSERT INTO food (food_name, food_id, food_price, food_size, quantity) VALUES ($1, $2, $3, $4, $5); INSERT INTO cart_item (cart_id) VALUES ($6)'
+  // const text = 'WITH f AS (INSERT INTO food (food_name, food_id, food_price, food_size, quantity) VALUES ($1, $2, $3, $4, $5) RETURNING id;) INSERT INTO cart_item (food_id, cart_id) SELECT f.id, $6 FROM f;'
 
   const values = [food_name, food_id, food_price, food_size, quantity, cart_id];
   db.query(text, values)
