@@ -10,16 +10,12 @@ const intervalTimeMinutes = 30; //intervalTimeMinutes * 1000 * 60
 
 // setInterval(krogerController.getToken, 10000);
 let callCount = 0;
+console.log(callCount);
 if (callCount === 0) {
+  console.log('here');
   callCount++;
+  krogerController.getToken();
 }
-// let callCount = 0;
-// console.log(callCount);
-// if (callCount === 0) {
-//   console.log('here');
-//   callCount++;
-//   krogerController.getToken();
-// }
 
 app.use(express.json());
 app.use(cookieParser());
@@ -28,18 +24,17 @@ app.use('/api', krogerRouter);
 // any login/register attempts will post to /auth, which will be handled by authRouter
 app.use('/auth', authRouter);
 // router that will handle logic related to adding items to cart associated with current authenticated user
-app.use('/cart', cartRouter);  
+app.use('/cart', cartRouter);
 
- 
 // handle requests for static files -> Not sure if we need this unless we bundle and try to enter production mode
 // app.use('/assets', express.static(path.join(__dirname, 'build')));
 
-
 // always serve index.html file so React router can handle routing on front-end
-app.get('/*', (req,res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../build/index.html'));
+app.get('/*', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.resolve(__dirname, '../build/index.html'));
 });
-
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) =>
