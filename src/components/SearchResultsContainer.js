@@ -10,10 +10,10 @@ function SearchResultsContainer({
   handleOnChange,
   handleOnClick,
   productSearchResults,
+  handleAddItemToCart
 }) {
-  console.log("productsearch", productSearchResults);
-  const searchResults = productSearchResults.map((item) => (
-    <SearchResultsItem item={item} />
+  const searchResults = productSearchResults.map((item, index) => (
+    <SearchResultsItem key={index + 'key'} resultArrIndex={index} item={item} handleAddItemToCart={handleAddItemToCart} />
   ));
   return (
     <div className="searchResultsContainer">

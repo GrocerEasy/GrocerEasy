@@ -48,7 +48,7 @@ krogerController.getItem = (req, res, next) => {
   // 01400943
   //FILTER LIMIT SET TO 10, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
   fetch(
-    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=10`,
+    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=8`,
     {
       method: 'GET',
       headers: {
