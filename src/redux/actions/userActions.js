@@ -6,7 +6,8 @@ import {
   USER_REGISTER_REQUEST,
   USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
-  USER_LOGIN_REQUEST
+  USER_LOGIN_REQUEST,
+  USER_LOGOUT
 } from '../types/userTypes';
 
 export const register = (username, email, password) => async (dispatch) => {
@@ -88,4 +89,10 @@ export const login = (username, password, email) => async (dispatch) => {
           : err.message
     });
   }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('userInfo');
+  dispatch({ type: USER_LOGOUT });
+  // document.location.href = '/login'
 };
