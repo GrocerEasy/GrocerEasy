@@ -11,7 +11,7 @@ cartController.update = (req, res, next) => {
   for (let key in cartObj) {
     // NEED TO FINISH THIS LOGIC LATER
   }
-}
+};
 
 cartController.getCart = (req, res, next) => {
   // grab userData from cookie sent by login route (that redirected to this route)
@@ -20,18 +20,21 @@ cartController.getCart = (req, res, next) => {
   res.clearCookie('data', { httpOnly: true });
   // get user's cart info using the id stored in the cookie
   const uid = userData.user.id;
-  db.query('SELECT f.* FROM cart c RIGHT OUTER JOIN cart_item ci ON ci.cart_id = c.id RIGHT OUTER JOIN food f ON f.id = ci.food_id WHERE c.user_id = $1;', [uid], (error, results) => {
-    if (error) {
-      // invoke express error handler
-      return next(error);
+  db.query(
+    'SELECT f.*, ci.cart_id FROM cart c RIGHT OUTER JOIN cart_item ci ON ci.cart_id = c.id RIGHT OUTER JOIN food f ON f.id = ci.food_id WHERE c.user_id = $1;',
+    [uid],
+    (error, results) => {
+      if (error) {
+        // invoke express error handler
+        return next(error);
+      } else {
+        userData.cart = results.rows;
+        res.locals.loginResult = userData;
+        return next();
+      }
     }
-    else {
-      userData.cart = results.rows;
-      res.locals.loginResult = userData;
-      return next();
-    }
-  });
-}
+  );
+};
 
 // groceryController.addItem = (req, res, next) => {
 //   // from res.locals.itemInfo:
