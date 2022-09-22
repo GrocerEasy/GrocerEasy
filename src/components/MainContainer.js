@@ -38,8 +38,8 @@ function MainContainer() {
     console.log("cart", itemsInCart);
   };
   const handleDeleteItemFromCart = (cartItemIndex) => {
-    console.log(cartItemIndex)
-    const newArray = itemsInCart.filter((item) => !itemsInCart[cartItemIndex])
+    console.log('index',cartItemIndex, 'items', itemsInCart)
+    const newArray = itemsInCart.filter((item, index) => index !== cartItemIndex)
     console.log('new', newArray)
     setItemsInCart(newArray);
     console.log("cart", itemsInCart);

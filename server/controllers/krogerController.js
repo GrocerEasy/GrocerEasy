@@ -14,7 +14,6 @@ const fetch = require('cross-fetch')
 // token_type: "bearer"
 
 krogerController.getToken = (req, res) => {
-  console.log(process.env.KROG_AUTH_CREDENTIALS)
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
     headers: {

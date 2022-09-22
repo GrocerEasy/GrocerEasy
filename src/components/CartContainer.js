@@ -6,42 +6,59 @@ import SubmitButton from "./SubmitButton";
 import SearchBox from "./SearchBox";
 import CartItem from "./CartItem";
 
-function CartContainer({itemsInCart, handleDeleteItemFromCart}) {
+function CartContainer({ itemsInCart, handleDeleteItemFromCart }) {
   const [cartTotal, setCartTotal] = useState(0.00);
-  const cartResults = (itemsInCart.length ? (itemsInCart.map((item, index) => (
-    <CartItem key={item.food_name} resultArrIndex={index} item={item} handleDeleteItemFromCart={handleDeleteItemFromCart} />
-  ))) : []);
-const sumCartItems = () => {
-  let sum = 0.00;
-  itemsInCart.forEach(item => sum+= item.food_price )
-  setCartTotal(sum);
-  return sum;
+  const [userLoggedIn, setUserLoggedIn] = useState()
+  const cartResults = itemsInCart.length
+    ? itemsInCart.map((item, index) => (
+        <CartItem
+          key={item.food_name + index}
+          resultArrIndex={index}
+          item={item}
+          handleDeleteItemFromCart={handleDeleteItemFromCart}
+        />
+      ))
+    : [];
+  const sumCartItems = () => {
+    let sum = 0.00;
+    itemsInCart.forEach((item) => (sum += item.food_price));
+    setCartTotal(sum.toFixed(2));
+    return sum;
+  };
 
-}
+  const handleSaveCart = () => {
+    cartApis.addCartToDatabase();
+
+  }
   useEffect(() => {
     sumCartItems();
-  }, [itemsInCart])
+  }, [itemsInCart]);
   return (
     <div className="cartContainer">
-    <div className="cartContainerDisplay">
-      <div className="cartHeader">Shopping Cart
-</div>
-      {/* <div className="cartResultsDisplay"> */}
+      <div className="cartContainerDisplay">
+        <div className="cartHeader">Shopping Cart
+        {userLoggedIn ? 
+        <SubmitButton handleOnClick={handleSaveCart}>Save Cart</SubmitButton> : ''
+        }
+        </div>
+        {/* <div className="cartResultsDisplay"> */}
         <table className="cartResultsTable">
           <tbody>
-
-          <tr className="topRowSearchTable">
-            <td style={{width: '50%'}}>Name</td>
-            <td style={{width: '20%'}}>Price</td>
-            <td style={{width: '15%'}}>Qty</td>
-            <td style={{width: '15%'}}>Remove</td>
-          </tr>
-          {cartResults}
+            <tr className="topRowSearchTable">
+              <td style={{ width: "50%" }}>Name</td>
+              <td style={{ width: "20%" }}>Price</td>
+              <td style={{ width: "15%" }}>Qty</td>
+              <td style={{ width: "15%" }}>Remove</td>
+            </tr>
+            {cartResults}
           </tbody>
         </table>
-      {/* </div> */}
+        {/* </div> */}
       </div>
-      <div className="cartFooter"><div>Total</div><div>${cartTotal}</div></div>
+      <div className="cartFooter">
+        <div>Total</div>
+        <div>${cartTotal}</div>
+      </div>
     </div>
   );
 }
