@@ -30,8 +30,7 @@ export default function Signup() {
       .then((response) => response.json())
       .then((data) => {
         console.log("data", data);
-        // Save userID and username in state (Redux)
-        // Storing access token in sessionStorage because it only persists as long as tab is open -> slightly more secure that localStorage (which never deletes)
+        // Save userID (data.userID) and username (data.username) in state (Redux)
         sessionStorage.setItem('accessToken', `${data.accessToken}`);
         Navigate('/');
       })
