@@ -1,3 +1,14 @@
+:root {
+
+  --primary-color: #e091d9;
+  --primary-color-light: #e3a9dd;
+  --secondary-color: #f8e2f5;
+  --tertiary-color: #FFE3E1;
+  --primary-text-color: white;
+  --gradient: linear-gradient( to bottom, var(--primary-color-light),  var(--primary-color));
+}
+/* element {
+} */
 .root {
   /* space   min-height: 100vh;
   /* backgroundColor: theme.palette.secondary.light, */
@@ -12,9 +23,21 @@
   /* height: 100vw; */
   /* styling */
   font-family: monospace;
-  background-color: rgb(248, 226, 245);
+  background-color: var(--secondary-color);
   /* margin: 0px; */
 }
+.forms {
+  background-color: var(--secondary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: monospace;
+  background-color: var(--secondary-color);
+}
+
 
 li {
   list-style: none;
@@ -27,11 +50,11 @@ li {
   /* dimensions */
   width: 100vw;
   /* styling */
-  background-color: rgb(224, 145, 217);
-  color: white;
-  border: black;
-  /* Note: for some reason adding padding will make width increment and only works on right side of this container */
-  border-style:solid;
+  /* background-color: var(--primary-color); */
+  background: var(--gradient);
+  color: var(--primary-text-color);
+  border: 0px;
+  box-shadow: 0 0 15px 2px var(--primary-color);
 }
 
 .inputBox {
@@ -215,25 +238,117 @@ li {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
-  height: 70vh;
+  height: 80vh;
   width: 95%;
+  border-radius: 25px;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 15px 2px var(--primary-color);
 }
 .searchResultsContainer {
   /* dimensions */
-  flex-grow: 2;
-  /* display: flex; */
+  /* flex-grow: 2; */
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
   /* justify-content: center; */
+  width: 66%;
   min-height: 100%;
   border-radius: 25px 0 0 25px;
+  border: 1px solid var(--primary-color);
+  border-right: 2px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  
 }
 .searchBox {
   /* position: fixed; */
   height: 10%;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
 .cartContainer {
   /* dimensions */
-  flex-grow: 1;
+  /* flex-grow: 1; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 34%;
   min-height: 100%;
+  border: 1px solid var(--primary-color);
   border-radius: 0 25px 25px 0;
+  background-color: var(--secondary-color);
+}
+.cartHeader {
+  /* dimensions */
+  /* flex-grow: 1; */
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cartFooter {
+  /* dimensions */
+  /* flex-grow: 1; */
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+input {
+  border-radius: 25px;
+  text-align: center;
+  width: 50%;
+  border: none;
+  border-color: var(--primary-color);
+}
+input:focus {
+  outline: none !important;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px 1px var(--primary-color);
+}
+.submitButton {
+  outline: none !important;
+  margin-left: 10px;
+  border-radius: 25px;
+  width: 10%;
+  border: none;
+  background-color: var(--primary-color);
+}
+.submitButton:hover {
+  background-color: var(--primary-color-light);
+}
+.submitButton:focus {
+  outline: none !important;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px 1px var(--primary-color-light);
+}
+
+.searchResultsDisplay {
+  display: flex;
+justify-content: center;
+margin-top: 10px;
+}
+.searchResultsTable {
+  width: 90%;
+  /* border: 1px solid black; */
+  ;
+}
+td {
+  text-align: center;
+  color: --primary-color
+}
+tr {
+  margin-top: 50px;
+  margin-bottom: 150px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.topRowSearchTable {
+  border-top: none;
+  border-bottom: 1px solid black;
+
+}
+.leftTableCell {
+  text-align: left;
 }
 

@@ -11,7 +11,6 @@ const config = require('config')
 //Go to sql database. Collect items if there else go to api connection to collect data and save it.
 router.post('/login', (req, res) => {
     // look for username and password info on body of request
-    console.log(req.body)
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
@@ -19,7 +18,7 @@ router.post('/login', (req, res) => {
     if (username && password) {
         db.query('SELECT * FROM user_info WHERE username = $1 AND password = $2 AND email = $3', [username, password, email], (error, results) => {
             // if the query to the DB does not find a match, output the error;
-            if (error) res.send('An error has occurred in the login route')
+            if (error) res.status(400).json({ err: 'An error has occurred in the login route' });
             // otherwise, if account exists that matches input username and password
             if (results.rows.length) {
                 // authenticate user
@@ -44,13 +43,12 @@ router.post('/login', (req, res) => {
                 });
             }
             else {
-                res.status(400).send('Incorrect Username and/or Password and/or Email');
+                res.status(400).json({ err: 'Incorrect Username and/or Password and/or Email' });
             }
-            res.status(400).end();
         });
     }
     else {
-        res.status(400).send('Please enter Username and Password');
+        res.status(400).json({ err: 'Please enter Username and Password' });
     }
 });
 
@@ -63,18 +61,18 @@ router.post('/register', (req, res) => {
     let email = req.body.email;
     console.log('BODY', req.body)
     if (!username || !password || !email) {
-        res.status(200).send('Please fill out all of the required data fields');
+        res.status(400).json({ err: 'Please fill out all of the required data fields' });
     }
     else {
         // error handling to prevent duplicate accounts from being registered
         db.query('SELECT * FROM user_info WHERE email = $1', [email], (error, results) => {
-            if (error) res.status(400).send('An error occurred during the registration process. Please try again.');
+            if (error) res.status(400).json({ err: 'An error occurred during the registration process. Please try again.' });
             // if the user is trying to register with an email that already exists in the db, results will be truthy
-            else if (results.rows.length) res.status(200).send('That email/username/password is already taken. Please try again using different credentials.');
+            else if (results.rows.length) res.status(400).json({ err: 'That email/username/password is already taken. Please try again using different credentials.'});
             // otherwise, insert credentials into database and authenticate user
             else {
                 db.query('INSERT INTO user_info (username, email, password) VALUES ($1, $2, $3) RETURNING id', [username, email, password], (error, results) => {
-                    if (error) res.status(400).send('An error occurred during the registration process. Please try again.');
+                    if (error) res.status(400).json({ err: 'An error occurred during the registration process. Please try again.' });
                     // otherwise, if there is no error
                     // save unique ID that is generated in table when adding a new user
                     const uid = results.rows[0].id;

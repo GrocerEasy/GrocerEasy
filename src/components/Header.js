@@ -1,11 +1,15 @@
 import React from "react";
 import { Outlet, Link } from 'react-router-dom';
+import './componentStylesheets/Header.css'
+import Logo from '../img/logo-color.png'
 
 
 const Header = (props) => {
   return (
     <header className="header">
-      <h1>GrocerEasy</h1>
+      <div className='logoContainer'>
+        <img src={Logo}/>
+      </div>
       <nav>
         <Link to='/login'>Log In</Link>
         <Link to='/signup'>Sign Up</Link>
