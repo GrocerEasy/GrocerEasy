@@ -37,23 +37,9 @@
   background-color: var(--secondary-color);
 }
 
-
 li {
   list-style: none;
   margin-bottom: 5px;
-}
-
-.header {
-  /* space */
-  text-align: center;
-  /* dimensions */
-  width: 100vw;
-  /* styling */
-  /* background-color: var(--primary-color); */
-  background: var(--gradient);
-  color: var(--primary-text-color);
-  border: 0px;
-  box-shadow: 0 0 15px 2px var(--primary-color);
 }
 
 .inputBox {
