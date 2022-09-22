@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorBox from "./ErrorBox";
-
+import Header from "./Header";
 
 
 export default function Login() {
@@ -48,24 +48,28 @@ export default function Login() {
   const errorDisplay = displayErr ? <ErrorBox value={displayErr}/> : null;
 
   return (
-    <div className="forms">
-      <h1>Log In</h1>
-      <form id="login-form" onSubmit={submitInfoToAuthRouter}>
-        <label>Username:</label>
-        <input className="username-field" type='text' name="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
-        <br/>
+    <>
+      <Header />
+      <div className="forms">
+        <h1>Log In</h1>
+        <form id="login-form" onSubmit={submitInfoToAuthRouter}>
+          <label>Username:</label>
+          <input className="username-field" type='text' name="username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+          <br/>
 
-        <label>Email:</label>
-        <input className="email-field" type='text' name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-        <br/>
+          <label>Email:</label>
+          <input className="email-field" type='text' name="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
+          <br/>
 
-        <label>Password:</label>
-        <input className="password-field" type='password' name="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-        <br/>
-        
-        <input className="submit-button" type='submit'></input>
-      </form>
-      {errorDisplay}
-    </div>
+          <label>Password:</label>
+          <input className="password-field" type='password' name="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+          <br/>
+          
+          <input className="submit-button" type='submit'></input>
+        </form>
+        {errorDisplay}
+      </div>
+    </>
+
   )
 };
