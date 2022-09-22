@@ -7,10 +7,11 @@ import Logo from '../img/logo-color.png'
 const Header = (props) => {
   return (
     <header className="header">
+      <div className='location'>Your Location: </div>
       <div className='logoContainer'>
         <img src={Logo}/>
       </div>
-      <nav>
+      <nav className='links'>
         <Link className="header-login-signup-button" to='/login'>Log In</Link>
         <Link className="header-login-signup-button" to='/signup'>Sign Up</Link>
       </nav>

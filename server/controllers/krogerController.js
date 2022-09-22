@@ -14,7 +14,6 @@ const fetch = require('cross-fetch')
 // token_type: "bearer"
 
 krogerController.getToken = (req, res) => {
-  console.log('in getToken');
   console.log(process.env.KROG_AUTH_CREDENTIALS)
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
@@ -49,7 +48,7 @@ krogerController.getItem = (req, res, next) => {
   // 01400943
   //FILTER LIMIT SET TO 10, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
   fetch(
-    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=10`,
+    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=8`,
     {
       method: 'GET',
       headers: {
