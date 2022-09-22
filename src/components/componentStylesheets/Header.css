@@ -6,13 +6,14 @@
   align-items: center;
   /* dimensions */
   width: 100vw;
-  height: 150px;
+  height: 160px;
   /* styling */
   /* background-color: var(--primary-color); */
   background: var(--gradient);
   color: var(--primary-text-color);
   border: 0px;
   box-shadow: 0 0 15px 2px var(--primary-color);
+  font-family: monospace;
 }
 
 .logoContainer {
@@ -26,10 +27,11 @@
   border-radius: 20%;
   width: 100%;
   height: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0.19);
 }
 
 .links {
-  width: 50%;
+  width: 70%;
   height: 40%;
   padding: 5%;
   grid-area: 1/3/2/4;
@@ -38,8 +40,24 @@
   display: flex;
   justify-content: space-between;
   margin-right: 10%;
-  background-color: white;
+  background-color: #f8e2f5;
   border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0.19);
+}
+
+.authLinks {
+  width: 100%;
+  height: 40%;
+  padding: 5%;
+  grid-area: 1/3/2/4;
+  justify-self: right;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10%;
+  background-color: #f8e2f5;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0.19);
 }
 
 .location {
@@ -53,24 +71,26 @@
   color: black;
   border-radius: 20px;
   justify-content: left;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0.19);
+  background-color: #f8e2f5;
 }
 
-  .header-login-signup-button {
-    background-color: white;
-    color: black;
-    text-decoration: none;
-    padding: 2px 5px 2px 5px;
-    margin: 3px;
-    border: 1px solid black;
-    border-radius: 3px;
-  }
+.header-login-signup-button {
+  background-color: white;
+  color: black;
+  text-decoration: none;
+  padding: 2px 5px 2px 5px;
+  margin: 3px;
+  border: 1px solid black;
+  border-radius: 3px;
+}
 
-  .header-login-signup-button:hover {
-    background-color: rgb(226, 226, 226);
-    text-decoration: none;
-    color: black;
-  }
+.header-login-signup-button:hover {
+  background-color: #e091d9;
+  text-decoration: none;
+  color: black;
+}
 
-  .header-login-signup-button:active {
+.header-login-signup-button:active {
 
-  }
+}

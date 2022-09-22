@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { redirect } from 'react-router';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ErrorBox from './ErrorBox';
 import './componentStylesheets/SignupLogin.css';
 import Header from './Header';
+import './componentStylesheets/Header.css'
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
