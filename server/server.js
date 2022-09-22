@@ -9,14 +9,22 @@ const cartRouter = require('./routes/cartRouter');
 const session = require('express-session');
 const krogerController = require('./controllers/krogerController');
 const intervalTimeMinutes = 30; //intervalTimeMinutes * 1000 * 60
+
 // setInterval(krogerController.getToken, 10000);
 let callCount = 0;
 console.log(callCount);
 if (callCount === 0) {
   console.log('here');
   callCount++;
-  krogerController.getToken();
+  console.log("AUTH TOKEN:",krogerController.getToken());
 }
+// let callCount = 0;
+// console.log(callCount);
+// if (callCount === 0) {
+//   console.log('here');
+//   callCount++;
+//   krogerController.getToken();
+// }
 
 app.use(express.json());
 
