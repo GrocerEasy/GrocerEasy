@@ -45,6 +45,21 @@
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0.19);
 }
 
+.authLinks {
+  width: 100%;
+  height: 40%;
+  padding: 5%;
+  grid-area: 1/3/2/4;
+  justify-self: right;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 10%;
+  background-color: #f8e2f5;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0.19);
+}
+
 .location {
   height: 40%;
   width: 80%;
