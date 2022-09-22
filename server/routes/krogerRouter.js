@@ -1,5 +1,5 @@
 const express = require('express');
-const groceryData = require('../controllers/groceryController');
+const groceryData = require('../controllers/cartController');
 const krogerController = require('../controllers/krogerController');
 const router = express.Router();
 
@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/', krogerController.getToken, (req, res) => {
   return res.status(200).json(res.locals.tokenData);
 });
-router.get('/location/:zipCode', krogerController.getLocation, (req, res) => {
+router.get('/location/:zip_code', krogerController.getLocation, (req, res) => {
   return res.status(200).json(res.locals.locationInfo);
 });
 router.get('/:item/:location', krogerController.getItem, (req, res) => {

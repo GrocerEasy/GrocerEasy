@@ -3,6 +3,8 @@ const krogerController = {};
 // Declare an empty object
 // Store token data in this object
 const tokenData = {};
+// import fetch from 'node-fetch';
+const fetch = require('cross-fetch')
 
 // Makes a POST request to the Kroger server
 // Right now, only logs the response, and saves data to the tokenData object declared above but get back
@@ -13,6 +15,7 @@ const tokenData = {};
 
 krogerController.getToken = (req, res) => {
   console.log('in getToken');
+  console.log(process.env.KROG_AUTH_CREDENTIALS)
   fetch('https://api.kroger.com/v1/connect/oauth2/token', {
     method: 'POST',
     headers: {
@@ -27,6 +30,7 @@ krogerController.getToken = (req, res) => {
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
       setInterval(krogerController.getToken, tokenData.expiresIn * 60 * 100); //request new token when old token expires
+     
       return tokenData;
     })
     .catch((error) => console.log(error));
@@ -40,11 +44,12 @@ krogerController.getToken = (req, res) => {
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 krogerController.getItem = (req, res, next) => {
   const { item, location } = req.params;
+  console.log('req.params',item, location)
   //make sure front end sends a default location ID if user does not provide one
   // 01400943
-  //FILTER LIMIT SET TO 5, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
+  //FILTER LIMIT SET TO 10, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
   fetch(
-    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=5`,
+    `https://api.kroger.com/v1/products?filter.term=${item}}&filter.locationId=${location}&filter.limit=10`,
     {
       method: 'GET',
       headers: {
@@ -77,9 +82,9 @@ krogerController.getItem = (req, res, next) => {
 };
 
 krogerController.getLocation = (req, res, next) => {
-  const { zipCode } = req.params;
+  const { zip_code } = req.params;
   //FILTER LIMIT SET TO 5, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED
-  let locationUrl = `https://api.kroger.com/v1/locations?filter.zipCode.near=${zipCode}&filter.limit=5`;
+  let locationUrl = `https://api.kroger.com/v1/locations?filter.zipCode.near=${zip_code}&filter.limit=5`;
   // Location request body
   fetch(locationUrl, {
     method: 'GET',
