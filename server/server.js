@@ -1,6 +1,6 @@
 const path = require('path');
 const express = require('express');
-export const app = express();
+const app = express();
 const PORT = 3000;
 const colors = require('colors');
 const krogerRouter = require('./routes/krogerRouter');
@@ -16,7 +16,7 @@ console.log(callCount);
 if (callCount === 0) {
   console.log('here');
   callCount++;
-  console.log("AUTH TOKEN:",krogerController.getToken());
+  console.log('AUTH TOKEN:', krogerController.getToken());
 }
 // let callCount = 0;
 // console.log(callCount);
@@ -43,16 +43,15 @@ app.use('/auth', authRouter);
 // router that will handle logic related to adding items to cart associated with current authenticated user
 app.use('/cart', cartRouter);
 
- 
 // handle requests for static files -> Not sure if we need this unless we bundle and try to enter production mode
 // app.use('/assets', express.static(path.join(__dirname, 'build')));
 
-
 // always serve index.html file so React router can handle routing on front-end
-app.get('/*', (req,res) => {
-  return res.status(200).sendFile(path.resolve(__dirname, '../build/index.html'));
+app.get('/*', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.resolve(__dirname, '../build/index.html'));
 });
-
 
 // catch-all route handler for any requests to an unknown route
 app.use('*', (req, res) =>

@@ -1,14 +1,14 @@
-import colors from 'colors';
-import supertest from 'supertest';
-
+// import colors from 'colors';
+const request = require('supertest');
+const server = 'http://localhost:3000';
 
 describe('test the /api route', () => {
-  describe('get the /api/test route', () => {
-    describe('given the test fails', () => {
-      it('should return a 404'.green, async () => {
+  describe('get the test route', () => {
+    describe('given the test succeeds', () => {
+      it('should return a 200', async () => {
         // expect(true).toBe(true);
 
-        await supertest().get('/api/test').expect(200);
+        await request(server).get('/api/test').expect(200);
       });
     });
   });
