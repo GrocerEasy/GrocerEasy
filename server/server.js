@@ -7,7 +7,6 @@ const krogerController = require('./controllers/krogerController');
 const authRouter = require('./routes/authRouter');
 const cartRouter = require('./routes/cartRouter');
 const cookieParser = require('cookie-parser');
-const krogerController = require('./controllers/krogerController');
 
 let callCount = 0;
 if (callCount === 0) {
