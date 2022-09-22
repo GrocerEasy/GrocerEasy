@@ -1,16 +1,16 @@
 import React, {useState} from "react";
 import { redirect } from "react-router";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const Navigate = useNavigate();
   
 
-  // route to localhost:3000/auth/register
   async function submitInfoToAuthRouter (e) {
     e.preventDefault();
     
@@ -20,69 +20,26 @@ export default function Signup() {
       password: password
     }
 
-    body = JSON.stringify(body)
-
-    console.log('JSON version of body', body);
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    
-    // const test = await axios.get('/auth/login')
-    // console.log(test);
-
-    // axios({
-    //   method: 'post',
-    //   url: '/auth/register',
-    //   data: {
-    //    username: 'evandeam',
-    //   email: 'ebdeam@gmail.com',
-    //   password: 'password'
-    //   }
-    // });
-    const bodyObj = {
-      username: username,
-      email: email,
-      password: password
-    }
-   await fetch(`/auth/login`, {
+   await fetch('/auth/register', {
       method: "POST", // or 'PUT'
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(bodyObj),
+      body: JSON.stringify(body),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log("data", data);
-      });
-    // axios({
-    //   method: 'get',
-    //   url: '/auth/login',
-    //   // responseType: 'stream'
-    // })
-    //   .then(function (response) {
-    //     console.log(response)
-      
-    //   });
-
-
-    // const submit = await axios.post('/auth/register', {
-    //   username: 'evandeam',
-    //   email: 'ebdeam@gmail.com',
-    //   password: 'password'
-    // }, config)
-
-    // fetch('localhost:8080/auth/register', {
-    //   method: 'POST',
-    //   headers: {'Content-Type': 'application/json'},
-    //   body: body
-    // })
-    // .then(res => res.json())
-    // // .then(res => console.log(res))
-    // .catch(err => console.log(err))
+        // Save userID and username in state (Redux)
+        // Storing access token in sessionStorage because it only persists as long as tab is open -> slightly more secure that localStorage (which never deletes)
+        sessionStorage.setItem('accessToken', `${data.accessToken}`);
+        Navigate('/');
+      })
+      .catch((err) => {
+        // assuming there was either some backend error OR the username or email is already associated with an account, this error gets returned from server
+        // get err message (err.locals? err.message?) and display on frontend
+        
+      })
   }
   
   return (
