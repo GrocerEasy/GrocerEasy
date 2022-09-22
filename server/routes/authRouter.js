@@ -7,9 +7,11 @@ const config = require('config')
 // Route is /auth
 
 
+
 //Go to sql database. Collect items if there else go to api connection to collect data and save it.
 router.post('/login', (req, res) => {
     // look for username and password info on body of request
+    console.log(req.body)
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
@@ -59,6 +61,7 @@ router.post('/register', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
+    console.log('BODY', req.body)
     if (!username || !password || !email) {
         res.status(200).send('Please fill out all of the required data fields');
     }
