@@ -2,12 +2,14 @@ import React, {useState} from "react";
 import { redirect } from "react-router";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ErrorBox from "./ErrorBox";
 
 
 export default function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [displayErr, setDisplayErr] = useState(false);
   const Navigate = useNavigate();
   
 
@@ -29,6 +31,12 @@ export default function Signup() {
     })
       .then((response) => response.json())
       .then((data) => {
+        if (data.err) {
+          const errMsg = data.err;
+          setDisplayErr(errMsg);
+          return;
+        }
+
         console.log("data", data);
         // Save userID and username in state (Redux)
         // Storing access token in sessionStorage because it only persists as long as tab is open -> slightly more secure that localStorage (which never deletes)
@@ -42,6 +50,8 @@ export default function Signup() {
       })
   }
   
+  const errorDisplay = displayErr ? <ErrorBox value={displayErr}/> : null;
+
   return (
     <div className="forms">
       <h1>Sign Up</h1>
@@ -59,6 +69,7 @@ export default function Signup() {
         <br/>
         <input type='submit'></input>
       </form>
+      {errorDisplay}
     </div>
   )
 };

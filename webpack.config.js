@@ -57,6 +57,10 @@ module.exports = {
         exclude: [/node_modules/, /client\/stylesheets\/modules/],
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.(png|jpg|gif|svg|eot|ttf)$/,
+        loader: 'url-loader',
+      },
     ],
   },
   plugins: [

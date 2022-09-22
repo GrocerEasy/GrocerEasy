@@ -1,0 +1,27 @@
+header {
+    height: 150px;
+}
+
+.header {
+    /* space */
+    display: flex;
+    text-align: right;
+    /* dimensions */
+    width: 100vw;
+    /* styling */
+    background-color: rgb(224, 145, 217);
+    color: white;
+    border: black;
+    /* Note: for some reason adding padding will make width increment and only works on right side of this container */
+    border-style:solid;
+  }
+
+  .logoContainer {
+    height: 140px;
+    width: 140px;
+  }
+
+  .logoContainer img {
+    width: 100%;
+    height: 100%;
+  }
