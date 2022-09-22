@@ -33,14 +33,25 @@ router.post('/login', (req, res) => {
 
                 // ADD LOGIC FOR REDIRECTING ROUTE/SENDING JWT
                 // send back id from user_info table that will be held in state and used to make future requests to cart router
-                res.status(200).send({
+                const userData = {
                     user: {
                         id: uid,
                         username: username,
                         },
                     message: `Login was successful. Welcome back to GrocerEasy ${username}`,
                     accessToken: token,  
-                });
+                }
+                const stringifiedData = JSON.stringify(userData)
+                res.cookie('data', stringifiedData, { httpOnly: true });
+                res.redirect(`/cart/getcart/${uid}`)
+                // res.status(200).send({
+                //     user: {
+                //         id: uid,
+                //         username: username,
+                //         },
+                //     message: `Login was successful. Welcome back to GrocerEasy ${username}`,
+                //     accessToken: token,  
+                // });
             }
             else {
                 res.status(400).json({ err: 'Incorrect Username and/or Password and/or Email' });
@@ -59,7 +70,6 @@ router.post('/register', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     let email = req.body.email;
-    console.log('BODY', req.body)
     if (!username || !password || !email) {
         res.status(400).json({ err: 'Please fill out all of the required data fields' });
     }
