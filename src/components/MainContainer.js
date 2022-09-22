@@ -8,6 +8,7 @@ function MainContainer() {
   const [searchLocationsText, setSearchLocationsText] = useState("");
   const [productSearchResults, setProductsSearchResults] = useState([]);
   const [storeLocationsResults, setStoreLocationResults] = useState([]);
+  const [itemsInCart, setItemsInCart] = useState([]);
 
   const submitSearchProductText = async () => {
     const request = "searchStoreItems";
@@ -15,21 +16,38 @@ function MainContainer() {
       searchStoreItems: searchProductsText,
       locationId: "70600119", //Placeholder currently need to update
     };
-    console.log("search text", searchProductsText);
-    setProductsSearchResults(await krogerApis.searchKrogerDatabase(request, payload));
-    console.log("Search Results:", productSearchResults);
+    setProductsSearchResults(
+      await krogerApis.searchKrogerDatabase(request, payload)
+    );
+    // console.log("Search Results:", productSearchResults);
   };
   const submitSearchStoreText = async () => {
     const request = "searchStoreLocations";
     const payload = { zipCode: searchLocationsText };
-    setStoreLocationResults(await krogerApis.searchKrogerDatabase(request, payload));
+    setStoreLocationResults(
+      await krogerApis.searchKrogerDatabase(request, payload)
+    );
     console.log("Store Locations:", storeLocationsResults);
+  };
+
+  const handleAddItemToCart = (productSearchResultsIndex) => {
+    setItemsInCart([
+      ...itemsInCart,
+      productSearchResults[productSearchResultsIndex],
+    ]);
+    console.log("cart", itemsInCart);
+  };
+  const handleDeleteItemFromCart = (cartItemIndex) => {
+    console.log(cartItemIndex)
+    const newArray = itemsInCart.filter((item) => !itemsInCart.indexOf(cartItemIndex))
+    console.log('new', newArray)
+    setItemsInCart(newArray.splice(cartItemIndex, 1));
+    console.log("cart", itemsInCart);
   };
   const handleOnChangeSearchProduct = (e) =>
     setSearchProductsText(e.target.value);
   const handleOnChangeSearchLocation = (e) =>
     setSearchLocationsText(e.target.value);
-console.log('STATE', productSearchResults)
   return (
     <div className="mainContainer">
       {/* <SearchBox handleOnChange={setSearchProductsText} handleOnClick={submitSearchProductText}>Search Products</SearchBox> */}
@@ -37,8 +55,12 @@ console.log('STATE', productSearchResults)
         handleOnChange={handleOnChangeSearchProduct}
         handleOnClick={submitSearchProductText}
         productSearchResults={productSearchResults}
+        handleAddItemToCart={handleAddItemToCart}
       />
-      <CartContainer />
+      <CartContainer
+        itemsInCart={itemsInCart}
+        handleDeleteItemFromCart={handleDeleteItemFromCart}
+      />
       {/* <InputAndCartContainer /> */}
     </div>
   );

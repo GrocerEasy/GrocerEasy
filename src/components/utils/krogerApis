@@ -15,11 +15,11 @@ const krogerApis = {
         url = `api/location/${payload.zipCode}`;
         break;
     }
-    console.log("PAYLOAD", payload, "REQUEST", request, "URL", url)
+    // console.log("PAYLOAD", payload, "REQUEST", request, "URL", url)
     const response = await fetch(url, options)
       .then((response) => response.json())
       .then((returnedData) => {
-        console.log('Returned Data', returnedData);
+        // console.log('Returned Data', returnedData);
         return returnedData;
       })
       .catch((err) => console.log(`Error with krogerApi ${request}`, err));
