@@ -2,21 +2,16 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const PORT = 3000;
-const colors = require('colors');
 const krogerRouter = require('./routes/krogerRouter');
 const authRouter = require('./routes/authRouter');
 const cartRouter = require('./routes/cartRouter');
-const session = require('express-session');
-const krogerController = require('./controllers/krogerController');
+const cookieParser = require('cookie-parser');
 const intervalTimeMinutes = 30; //intervalTimeMinutes * 1000 * 60
 
 // setInterval(krogerController.getToken, 10000);
 let callCount = 0;
-console.log(callCount);
 if (callCount === 0) {
-  console.log('here');
   callCount++;
-  console.log("AUTH TOKEN:",krogerController.getToken());
 }
 // let callCount = 0;
 // console.log(callCount);
@@ -27,19 +22,13 @@ if (callCount === 0) {
 // }
 
 app.use(express.json());
-
-// create a new session for users, that will be used when they attempt to authenticate
-app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(cookieParser());
 
 app.use('/api', krogerRouter);
 // any login/register attempts will post to /auth, which will be handled by authRouter
 app.use('/auth', authRouter);
 // router that will handle logic related to adding items to cart associated with current authenticated user
-app.use('/cart', cartRouter);
+app.use('/cart', cartRouter);  
 
  
 // handle requests for static files -> Not sure if we need this unless we bundle and try to enter production mode
