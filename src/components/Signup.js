@@ -8,7 +8,7 @@ import Header from './Header';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../redux/actions/userActions';
+import { register, login } from '../redux/actions/userActions';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -25,6 +25,7 @@ export default function Signup() {
    */
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
+  const userLogin = useSelector((state) => state.userLogin);
   const { loading, userInfo, error } = userRegister;
   const submitHandler = (e) => {
     e.preventDefault();
@@ -35,7 +36,7 @@ export default function Signup() {
    * We're checking to see if the userInfo populates/exists
    */
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo || userLogin.userInfo) {
       Navigate('/');
     }
   }, [userInfo]);
@@ -79,7 +80,7 @@ export default function Signup() {
 
   return (
     <>
-      <Header/>
+      <Header />
       <div className='forms'>
         <h1>Sign Up</h1>
         <form id='signup-form' onSubmit={submitHandler}>
@@ -118,6 +119,5 @@ export default function Signup() {
         {errorDisplay}
       </div>
     </>
-
   );
 }
