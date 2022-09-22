@@ -4,10 +4,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ErrorBox from './ErrorBox';
 import './componentStylesheets/SignupLogin.css';
+import Header from './Header';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
-import { register } from '../redux/actions/userActions';
+import { register, login } from '../redux/actions/userActions';
 
 export default function Signup() {
   const [username, setUsername] = useState('');
@@ -24,6 +25,7 @@ export default function Signup() {
    */
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
+  const userLogin = useSelector((state) => state.userLogin);
   const { loading, userInfo, error } = userRegister;
   const submitHandler = (e) => {
     e.preventDefault();
@@ -34,7 +36,7 @@ export default function Signup() {
    * We're checking to see if the userInfo populates/exists
    */
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo || userLogin.userInfo) {
       Navigate('/');
     }
   }, [userInfo]);
@@ -77,42 +79,45 @@ export default function Signup() {
   const errorDisplay = error ? <ErrorBox value={error} /> : null;
 
   return (
-    <div className='forms'>
-      <h1>Sign Up</h1>
-      <form id='signup-form' onSubmit={submitHandler}>
-        <label>Username:</label>
-        <input
-          className='username-field'
-          type='text'
-          name='username'
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        ></input>
-        <br />
+    <>
+      <Header />
+      <div className='forms'>
+        <h1>Sign Up</h1>
+        <form id='signup-form' onSubmit={submitHandler}>
+          <label>Username:</label>
+          <input
+            className='username-field'
+            type='text'
+            name='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+          <br />
 
-        <label>Email:</label>
-        <input
-          className='email-field'
-          type='text'
-          name='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <br />
+          <label>Email:</label>
+          <input
+            className='email-field'
+            type='text'
+            name='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <br />
 
-        <label>Password:</label>
-        <input
-          className='password-field'
-          type='password'
-          name='password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <br />
+          <label>Password:</label>
+          <input
+            className='password-field'
+            type='password'
+            name='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+          <br />
 
-        <input className='submit-button' type='submit'></input>
-      </form>
-      {errorDisplay}
-    </div>
+          <input className='submit-button' type='submit'></input>
+        </form>
+        {errorDisplay}
+      </div>
+    </>
   );
 }

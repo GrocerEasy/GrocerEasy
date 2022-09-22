@@ -4,7 +4,7 @@ const krogerController = {};
 // Store token data in this object
 const tokenData = {};
 // import fetch from 'node-fetch';
-const fetch = require('cross-fetch')
+const fetch = require('cross-fetch');
 
 // Makes a POST request to the Kroger server
 // Right now, only logs the response, and saves data to the tokenData object declared above but get back
@@ -28,7 +28,7 @@ krogerController.getToken = (req, res) => {
       tokenData.expiresIn = data.expires_in;
       tokenData.tokenType = data.token_type;
       setInterval(krogerController.getToken, tokenData.expiresIn * 60 * 100); //request new token when old token expires
-     
+
       return tokenData;
     })
     .catch((error) => console.log(error));
@@ -42,7 +42,7 @@ krogerController.getToken = (req, res) => {
 //https://api.kroger.com/v1//products?filter.term=bread&filter.locationId=01400943&filter.limit=1
 krogerController.getItem = (req, res, next) => {
   const { item, location } = req.params;
-  console.log('req.params',item, location)
+  console.log('req.params', item, location);
   //make sure front end sends a default location ID if user does not provide one
   // 01400943
   //FILTER LIMIT SET TO 10, CHANGE URL IF DIFFERENT AMOUNT IS DESIRED

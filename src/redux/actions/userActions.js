@@ -53,3 +53,39 @@ export const register = (username, email, password) => async (dispatch) => {
     });
   }
 };
+
+export const login = (username, password, email) => async (dispatch) => {
+  try {
+    dispatch({
+      // Calling our reducer and populating the store with loading: true
+      type: USER_LOGIN_REQUEST
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const { data } = await axios.post(
+      '/auth/login',
+      { username, password, email },
+      config
+    );
+
+    dispatch({
+      type: USER_LOGIN_SUCCESS,
+      payload: data
+    });
+
+    localStorage.setItem('userInfo', JSON.stringify(data));
+  } catch (err) {
+    dispatch({
+      type: USER_LOGIN_FAIL,
+      payload:
+        err.response && err.response.data.err
+          ? err.response.data.err
+          : err.message
+    });
+  }
+};
