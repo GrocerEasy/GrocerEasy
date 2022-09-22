@@ -9,7 +9,7 @@ const config = require('config')
 
 
 //Go to sql database. Collect items if there else go to api connection to collect data and save it.
-router.post('/login', (req, res) => {
+router.post('/login', (req, res, next) => {
     // look for username and password info on body of request
     console.log(req.body)
     let username = req.body.username;
@@ -19,7 +19,7 @@ router.post('/login', (req, res) => {
     if (username && password) {
         db.query('SELECT * FROM user_info WHERE username = $1 AND password = $2 AND email = $3', [username, password, email], (error, results) => {
             // if the query to the DB does not find a match, output the error;
-            if (error) res.send('An error has occurred in the login route')
+            if (error) return next('An error has occurred in the login route');
             // otherwise, if account exists that matches input username and password
             if (results.rows.length) {
                 // authenticate user
@@ -44,19 +44,18 @@ router.post('/login', (req, res) => {
                 });
             }
             else {
-                res.status(400).send('Incorrect Username and/or Password and/or Email');
+                return next('Incorrect Username and/or Password and/or Email');
             }
-            res.status(400).end();
         });
     }
     else {
-        res.status(400).send('Please enter Username and Password');
+        return next('Please enter Username and Password');
     }
 });
 
 
 // Route that will be used to handle registration requests
-router.post('/register', (req, res) => {
+router.post('/register', (req, res, next) => {
     // grab username, password, and email from front-end request
     let username = req.body.username;
     let password = req.body.password;
