@@ -3,6 +3,7 @@ import { redirect } from 'react-router';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import ErrorBox from './ErrorBox';
+import './componentStylesheets/SignupLogin.css';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -78,34 +79,38 @@ export default function Signup() {
   return (
     <div className='forms'>
       <h1>Sign Up</h1>
-      <form onSubmit={submitHandler}>
+      <form id='signup-form' onSubmit={submitHandler}>
         <label>Username:</label>
         <input
+          className='username-field'
           type='text'
           name='username'
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         ></input>
-
         <br />
+
         <label>Email:</label>
         <input
+          className='email-field'
           type='text'
           name='email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         ></input>
-
         <br />
+
         <label>Password:</label>
         <input
+          className='password-field'
           type='password'
           name='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         ></input>
         <br />
-        <input type='submit'></input>
+
+        <input className='submit-button' type='submit'></input>
       </form>
       {errorDisplay}
     </div>

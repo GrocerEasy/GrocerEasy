@@ -1,13 +1,14 @@
 import React from "react";
+import AddToCart from '../img/add-to-cart.svg'
 
-function SearchResultsItem({item}) {
+function SearchResultsItem({item, resultArrIndex, handleAddItemToCart}) {
   return (
     < >
-    <tr>
+    <tr className="searchResultItemRow">
       <td className="leftTableCell">{item.food_name}</td>
       <td>{item.food_size}</td>
       <td>{item.food_price}</td>
-      <td>+</td>
+      <td><img className="addToCartIcon" src={AddToCart} onClick={() => handleAddItemToCart(resultArrIndex)}></img></td>
     </tr>
     </>
   );
