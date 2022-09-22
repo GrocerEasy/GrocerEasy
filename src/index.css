@@ -2,8 +2,8 @@
 
   --primary-color: #e091d9;
   --primary-color-light: #e3a9dd;
-  --tertiary-color: #FFE3E1;
   --secondary-color: #f8e2f5;
+  --tertiary-color: #FFE3E1;
   --primary-text-color: white;
 }
 /* element {
@@ -243,7 +243,7 @@ li {
   border-radius: 25px 0 0 25px;
   border: 1px solid var(--primary-color);
   border-right: 2px solid var(--primary-color);
-  background-color: var(--tertiary-color);
+  background-color: var(--secondary-color);
   
 }
 .searchBox {
@@ -263,7 +263,7 @@ li {
   min-height: 100%;
   border: 1px solid var(--primary-color);
   border-radius: 0 25px 25px 0;
-  background-color: var(--tertiary-color);
+  background-color: var(--secondary-color);
 }
 .cartHeader {
   /* dimensions */
